@@ -11,7 +11,33 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
+mix.autoload({
+        'jquery': ['$', 'window.jQuery',"jQuery","window.$","jquery","window.jquery"],
+        'popper.js/dist/umd/popper.js': ['Popper']
+    })
+    .js('resources/js/app.js', 'js')
+    .postCss('resources/css/app.css', 'css', [
         //
-    ]);
+    ])
+    // .sass('resources/scss/app.scss', 'css')
+    .setPublicPath('public/dist')
+    .setResourceRoot('../')
+    .options({
+        // processCssUrls: false
+        fileLoaderDirs: {
+            images: `images`,
+            fonts: `dist/fonts`
+        },
+        devtool: 'source-map'
+    }).sourceMaps(true, 'source-map')
+    .copy( 'resources/adminlte/dist/img/', 'public/dist/images/', false ) // untuk sementara, selama ngetest template biar jalan di laravel copy aja dulu semua gambar dari template
+    .version();
+ 
+/*
+NOTE :
+- Jquery, dan popper js ada konfigurasi tambahan di javascript dan konfigurasi webpack mix ini. karena itu install dari npm aja, bukan file asli dari template
+- Option setPublicPath supaya semua resource yang digenerate laravel mix digenerate di direktori tersebut
+- Option set resource root maksudnya supaya path relative resource css sesuai template tetap terjaga, misalnya path font, gambar dll
+- TBA
+
+ */

@@ -1,6 +1,6 @@
 {
-    "/js/bootstrap.bundle.js": "/js/bootstrap.bundle.js?id=530cd170e5897720c5899da91a8a8d0d",
-    "/css/app.css": "/css/app.css?id=68b329da9893e34099c7d8ad5cb9c940",
+    "/js/app.js": "/js/app.js?id=bfdbbfef5dece48a1e05829b7ff8aa0b",
+    "/css/app.css": "/css/app.css?id=7b171cfc69e02621e37a052b7c0cffe9",
     "/images/AdminLTELogo.png": "/images/AdminLTELogo.png?id=356abcc182d932ae72fd5139b76dde2d",
     "/images/avatar.png": "/images/avatar.png?id=5861289701336cb0daa094f8546c4d8b",
     "/images/avatar2.png": "/images/avatar2.png?id=83c587813321745ab13af1a10092f2a6",
@@ -24,6 +24,7 @@
     "/images/prod-3.jpg": "/images/prod-3.jpg?id=b6c6db15d073e9e44bbb113dbb5b20b8",
     "/images/prod-4.jpg": "/images/prod-4.jpg?id=4052265b5de273cfdf80560ecf49d6cc",
     "/images/prod-5.jpg": "/images/prod-5.jpg?id=85faf47057886d4c3d3306d85a01c8dd",
+    "/images/sikompak_logo.png": "/images/sikompak_logo.png?id=f57d010534026c4dc74ee02c7add9720",
     "/images/user1-128x128.jpg": "/images/user1-128x128.jpg?id=e6d68c3dc30cad6f54d8ad6541d7f83b",
     "/images/user2-160x160.jpg": "/images/user2-160x160.jpg?id=18bf40e301978775dad420d56d4cfda6",
     "/images/user3-128x128.jpg": "/images/user3-128x128.jpg?id=b3d26752d331a2dd73bc74f2838aeaf3",
