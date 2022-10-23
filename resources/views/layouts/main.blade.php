@@ -61,10 +61,10 @@
                             <img src="{{ asset('dist/images/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Alexander Pierce</a>
+                            <a href="#" class="d-block">Natalia Sihombing</a>
                         </div>
                     </div>
-                    @include('layouts.menu')
+                    @include('layouts.menubackup')
                 </div>
                 <!-- /.sidebar -->
             </aside>

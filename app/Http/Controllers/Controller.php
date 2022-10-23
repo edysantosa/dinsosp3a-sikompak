@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $menuList = null;
+
+    public function __construct()
+    {
+        $menu = new \App\Models\Menu;
+        $this->menuList = $menu->tree();
+    }
 }
