@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('menu_title', 255)->default(null);
             $table->integer('parent_id')->default(0);
-            $table->string('sort_order')->default(0);
+            $table->tinyInteger('sort_order')->default(0);
             $table->string('slug', 255)->default(null);
             $table->string('icon', 255)->default('');
             $table->timestamps();

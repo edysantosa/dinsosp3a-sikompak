@@ -9,6 +9,15 @@ class Menu extends Model
 {
     use HasFactory;
 
+
+    // Ini untuk mendapatkan route dari slug,
+    // contohnya untuk digunakan di menu untuk ngecek menu aktif
+    protected $appends = ['route'];
+    public function getRouteAttribute()
+    {
+        return substr($this->slug, 1) ?: '/'; // return / saja kalau string kosong untuk menu
+    }
+
     public function parent()
     {
         return $this->hasOne('App\Models\Menu', 'id', 'parent_id')->orderBy('sort_order');
@@ -16,7 +25,6 @@ class Menu extends Model
      
     public function children()
     {
-     
         return $this->hasMany('App\Models\Menu', 'parent_id', 'id')->orderBy('sort_order');
     }
      

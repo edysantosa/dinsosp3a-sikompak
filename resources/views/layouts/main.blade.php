@@ -6,7 +6,9 @@
         <title>Sikompak</title>
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Main App CSS -->
         <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
 
     <body class="hold-transition sidebar-mini layout-navbar-fixed">
@@ -64,7 +66,7 @@
                             <a href="#" class="d-block">Natalia Sihombing</a>
                         </div>
                     </div>
-                    @include('layouts.menubackup')
+                    @include('layouts.menu')
                 </div>
                 <!-- /.sidebar -->
             </aside>
@@ -76,7 +78,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Blank Page</h1>
+                                <h1>Blank Page {{ Request::route()->uri()  }}</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -123,12 +125,21 @@
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 0.0.1
                 </div>
-                <strong>Copyright &copy; 2022 <a href="https://dissosp3a@baliprov.go.id">Dinas Sosial P3A Prov. Bali</a>.</strong>.
+                <strong>Copyright &copy; 2022 <a href="https://dissosp3a@baliprov.go.id">Dinas Sosial P3A Prov. Bali</a>.</strong>
             </footer>
         </div>
         <!-- ./wrapper -->
 
-        <!-- jQuery -->
+        <!-- javascript -->    
+        <!-- 
+            Tolong jangan dibuka-buka bli!
+              ____  _                       ____ _____   _      ____                   ____        _ _ 
+             |  _ \(_)_ __  ___  ___  ___  |  _ \___ /  / \    |  _ \ _ __ _____   __ | __ )  __ _| (_)
+             | | | | | '_ \/ __|/ _ \/ __| | |_) ||_ \ / _ \   | |_) | '__/ _ \ \ / / |  _ \ / _` | | |
+             | |_| | | | | \__ \ (_) \__ \ |  __/___) / ___ \  |  __/| | | (_) \ V /  | |_) | (_| | | |
+             |____/|_|_| |_|___/\___/|___/ |_|  |____/_/   \_\ |_|   |_|  \___/ \_/   |____/ \__,_|_|_|
+         -->    
         <script src="{{ asset('dist/js/app.js') }}"></script>
+        @yield('pagescript')
     </body>
 </html>

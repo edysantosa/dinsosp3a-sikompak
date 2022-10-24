@@ -16,9 +16,11 @@ mix.autoload({
         'popper.js/dist/umd/popper.js': ['Popper']
     })
     .js('resources/js/app.js', 'js')
-    .postCss('resources/css/app.css', 'css', [
-        //
-    ])
+    .js('resources/js/login.js', 'js')
+    .js('resources/js/dashboard.js', 'js')
+    .postCss('resources/css/app.css', 'css')
+    .postCss('resources/css/login.css', 'css')
+    .postCss('resources/css/datatables.css', 'css')
     // .sass('resources/scss/app.scss', 'css')
     .setPublicPath('public/dist')
     .setResourceRoot('../')
