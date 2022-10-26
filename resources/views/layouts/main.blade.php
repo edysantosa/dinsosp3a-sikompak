@@ -33,7 +33,10 @@
                             <i class="far fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                            <a href="#" class="dropdown-item dropdown-footer">Logout</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item dropdown-footer"><i class="fas fa-user mr-1"></i> Logout</button>
+                            </form>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">Edit Profil</a>
                         </div>

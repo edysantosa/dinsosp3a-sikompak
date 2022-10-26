@@ -22,11 +22,11 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'username'    => 'required',
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
         
-        if (!auth()->attempt($request->only('username', 'password'), $request->remember)) {
+        if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
             return back()->with('status', 'Email atau password salah');
         }
 

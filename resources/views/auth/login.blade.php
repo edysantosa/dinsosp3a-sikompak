@@ -15,7 +15,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Sikompak</b></a>
+                <a href="{{url('/')}}" class="h1"><b>Sikompak</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sistem Komunikasi Provinsi dan Kabupaten/Kota</p>
@@ -28,7 +28,7 @@
                 @if ($errors->any())
                     <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <ul>
+                        <ul class="mb-0">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -36,10 +36,10 @@
                     </div>                                
                 @endif
 
-                <form action="{{ route('login') }}" method="post">
+                <form id="login-form" action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('username') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" id="password"  name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Ingat Saya
                                 </label>
