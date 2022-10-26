@@ -33,7 +33,7 @@
                             <i class="far fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                            <form action="{{ route('logout') }}" method="post">
+                            <form action="{{ route('auth.logout.index') }}" method="post">
                                 @csrf
                                 <button type="submit" class="dropdown-item dropdown-footer"><i class="fas fa-user mr-1"></i> Logout</button>
                             </form>

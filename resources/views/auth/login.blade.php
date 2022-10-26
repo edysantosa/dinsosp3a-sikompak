@@ -36,7 +36,7 @@
                     </div>                                
                 @endif
 
-                <form id="login-form" action="{{ route('login') }}" method="post">
+                <form id="login-form" action="{{ route('auth.login.store') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('username') }}">

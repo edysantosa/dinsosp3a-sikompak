@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
@@ -24,15 +25,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // Authentication
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store']);
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+// Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::post('/login', [LoginController::class, 'store']);
+// Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-// PSKS
-Route::get('/psks', [PsksController::class, 'index'])->name('psks');
+// Authentication Routes
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::resource('/login', LoginController::class);
+    Route::resource('/logout', LogoutController::class);
+});
 
-// Test
-Route::get('/settings/user', [TestController::class, 'index']);
-Route::get('/settings/satu', [TestController::class, 'satu']);
-Route::get('/settings/dua', [TestController::class, 'dua']);
-Route::get('/settings/tiga', [TestController::class, 'tiga']);
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('/users', UserController::class);
+});
