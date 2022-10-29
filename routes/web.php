@@ -22,12 +22,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('layouts.main');
 // });
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // Authentication
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 // Route::post('/login', [LoginController::class, 'store']);
 // Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
 // Authentication Routes
 Route::prefix('auth')->name('auth.')->group(function () {
