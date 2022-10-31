@@ -21,8 +21,33 @@
 @endsection
 
 @section('content')
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body table-responsive">
+
+            <table class="table table-bordered table-striped dt-responsive yajra-datatable w-100">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th class="w-50">Nama</th>
+                        <th class="w-50">Email</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer">
+                <a class="btn btn-app bg-info">
+                    <i class="fas fa-user-plus"></i> Tambah User
+                </a>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('pagescript')
-<script src="{{ asset('dist/js/dashboard.js') }}"></script>
+<script src="{{ asset('dist/js/users.js') }}"></script>
 @stop

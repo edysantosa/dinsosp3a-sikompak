@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -19,11 +20,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.users.index', [
-            'users' => User::all(),
-        ]);
+        if ($request->ajax()) {
+            return DataTables::eloquent(
+                User::query()
+            )
+            ->addIndexColumn()
+            ->setRowId('id')
+            ->make(true);
+        }
+
+        return view('admin.users.index');
     }
 
     /**

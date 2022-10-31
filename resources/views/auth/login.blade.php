@@ -77,7 +77,6 @@
     </div>
     <!-- /.login-box -->
 
-    <script src="{{ asset('dist/js/app.js') }}"></script>
     <script src="{{ asset('dist/js/login.js') }}"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+require('./app');
 require ('../adminlte/plugins/jquery-validation/jquery.validate.min.js');
 require ('../adminlte/plugins/jquery-validation/additional-methods.min.js');
 
