@@ -30,7 +30,6 @@ $(document).ready(function() {
                 <div class="btn-group">
                 <button type="button" class="btn btn-warning trigger" data-trigger="edit"> <i class="fas fa-pencil-alt"></i> </button>
                 <button type="button" class="btn btn-danger trigger" data-trigger="delete"> <i class="fas fa-times"></i> </button>
-                <button type="button" class="btn btn-danger trigger" data-trigger="delete"> <i class="fas fa-spin fa-circle-notch"></i> </button>
                 </div>
             `;
             }},
@@ -44,6 +43,7 @@ $(document).ready(function() {
     // let id = current_row.attr('id');
 
     let id = $(this).parents('tr').attr('id');
+    let $button = $(this);
     
     switch($(this).data('trigger')) {
       case 'delete':
@@ -58,7 +58,13 @@ $(document).ready(function() {
                         dataType : 'json',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
+                        },
+                        beforeSend: function() {
+                            $button.parent().find('button').prop('disabled', true);
+                            $button.html('<i class="fas fa-spin fa-circle-notch"></i>');
+                        },
+                        complete: function() {
+                        },
                     }).fail(function(xhr, status, statusText){
                         var message = "Unknown error has occured";
                         if( xhr.responseJSON ){
@@ -66,7 +72,6 @@ $(document).ready(function() {
                         }
                         bootbox.alert(message);
                     }).done(function(response){
-                        bootbox.alert(response.message);
                         datatable.draw();
                     });
                 }
