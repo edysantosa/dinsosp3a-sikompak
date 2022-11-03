@@ -19,6 +19,7 @@ mix.autoload({
     .js('resources/js/login.js', 'js')
     .js('resources/js/dashboard.js', 'js')
     .js('resources/js/users.js', 'js')
+    .js('resources/js/user-create.js', 'js')
     .postCss('resources/css/app.css', 'css')
     .postCss('resources/css/login.css', 'css')
     // .sass('resources/scss/app.scss', 'css')

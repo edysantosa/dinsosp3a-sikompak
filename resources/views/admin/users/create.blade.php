@@ -41,5 +41,5 @@
 @endsection
 
 @section('pagescript')
-<script src="{{ asset('dist/js/users.js') }}"></script>
+<script src="{{ asset('dist/js/user-create.js') }}"></script>
 @stop

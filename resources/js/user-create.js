@@ -7,7 +7,6 @@ $(document).ready(function() {
         rules: {
             name: {
                 required: true,
-                email: true,
             },
             email: {
                 required: true,
@@ -20,11 +19,11 @@ $(document).ready(function() {
         },
         messages: {
             name: {
-                required: "masukkan nama",
+                required: "Masukkan nama",
             },
             email: {
-                required: "masukkan alamat email",
-                email: "masukkan alamat email yang valid"
+                required: "Masukkan alamat email",
+                email: "Masukkan alamat email yang valid"
             },
             password: {
                 required: "Masukkan kata sandi",
@@ -34,7 +33,7 @@ $(document).ready(function() {
         errorElement: 'span',
         errorPlacement: function (error, element) {
             error.addClass('invalid-feedback');
-            element.closest('.input-group').append(error);
+            element.parent().append(error);
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass('is-invalid');

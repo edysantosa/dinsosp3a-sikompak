@@ -53,6 +53,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name'     => 'required|max:255',
+            'email'    => 'required|max:255|email|unique:users',
+            'password' => 'required|min:3|max:255',
+        ]);
+
         $user = User::create($request->except('_token', 'roles'));
         $user->roles()->sync($request->roles);
 
@@ -93,6 +99,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->validate($request, [
+            'name'  => 'required|max:255',
+            'email' => 'required|max:255|email|unique:users,email,' . $user->id
+        ]);
+
         $user->update($request->except('_token', 'roles'));
         $user->roles()->sync($request->roles);
 

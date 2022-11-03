@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::Create([
             'name' => "Dinas Sosial P3A Prov. Bali",
-            'email' => 'dinsosp3@baliprov.go.id',
+            'email' => 'dinsosp3a@baliprov.go.id',
             'password' => Hash::make('123'),
         ]);
     }
