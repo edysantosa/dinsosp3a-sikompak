@@ -19,23 +19,8 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sistem Komunikasi Provinsi dan Kabupaten/Kota</p>
-                @if (session('status'))
-                    <div class="alert alert-warning alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <i class="icon fas fa-ban"></i> {{ session('status' )}}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-warning alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>                                
-                @endif
-
+                @include('partials.alerts')
+                @include('partials.errors')
                 <form id="login-form" action="{{ route('auth.login.store') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">

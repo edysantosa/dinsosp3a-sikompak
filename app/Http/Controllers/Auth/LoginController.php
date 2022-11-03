@@ -27,7 +27,7 @@ class LoginController extends Controller
         ]);
         
         if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            return back()->with('status', 'Email atau password salah');
+            return back()->with('warning', 'Email atau password salah');
         }
 
         return redirect()->route('dashboard');
