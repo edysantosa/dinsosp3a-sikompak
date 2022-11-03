@@ -2,6 +2,7 @@ require('./app');
 require('./datatables');
 import toastr from '../adminlte/plugins/toastr/toastr.min.js';
 import bootbox from 'bootbox';
+import datatableId from 'datatables.net-plugins/i18n/id.json';
 var datatable;
 
 $(document).ready(function() {
@@ -34,6 +35,7 @@ $(document).ready(function() {
             `;
             }},
         ],
+        language: datatableId,
     });
 }).on('click', '.trigger', function(e){
     // let current_row = $(this).parents('tr');
