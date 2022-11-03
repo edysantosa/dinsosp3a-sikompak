@@ -40,7 +40,7 @@
 
         </div>
         <div class="card-footer">
-                <a class="btn btn-app bg-info">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-app bg-info">
                     <i class="fas fa-user-plus"></i> Tambah User
                 </a>
         </div>

@@ -7,13 +7,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Add User</h1>
+                <h1>Edit User</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Admin</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
-                    <li class="breadcrumb-item active">Add user</li>
+                    <li class="breadcrumb-item active">Edit user</li>
                 </ol>
             </div>
         </div>
@@ -29,8 +29,9 @@
             <!-- Horizontal Form -->
             <div class="card">
                 <!-- form start -->
-                <form id="user-create-form" class="form-horizontal" action="{{ route('admin.users.store') }}" method="post">
-                    @include('admin.users.partials.form', ['create' => true])
+                <form id="user-create-form" class="form-horizontal" action="{{ route('admin.users.update', $user->id) }}" method="post">
+                    @method('PATCH')
+                    @include('admin.users.partials.form')
                 </form>
             </div>
             <!-- /.card -->

@@ -79,7 +79,7 @@ $(document).ready(function() {
         });  
         break;
       case 'edit':
-        location.href = 'users/' + id;
+        location.href = `users/${id}/edit`;
         break;
     }  
 });

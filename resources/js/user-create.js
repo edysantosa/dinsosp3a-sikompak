@@ -3,13 +3,12 @@ require ('../adminlte/plugins/jquery-validation/jquery.validate.min.js');
 require ('../adminlte/plugins/jquery-validation/additional-methods.min.js');
 
 $(document).ready(function() {
-    // $.validator.setDefaults({
-    //     submitHandler: function () {
-    //         alert( "Form successful submitted!" );
-    //     }
-    // });
-    $('#login-form').validate({
+    $('#user-create-form').validate({
         rules: {
+            name: {
+                required: true,
+                email: true,
+            },
             email: {
                 required: true,
                 email: true,
@@ -20,9 +19,12 @@ $(document).ready(function() {
             },
         },
         messages: {
+            name: {
+                required: "masukkan nama",
+            },
             email: {
-                required: "Masukkan alamat email",
-                email: "Masukkan alamat email yang valid"
+                required: "masukkan alamat email",
+                email: "masukkan alamat email yang valid"
             },
             password: {
                 required: "Masukkan kata sandi",
