@@ -53,4 +53,25 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role');
     }
+
+
+    /**
+     * Check apakah user punya satu role tertentu
+     * @param  string  $role [description]
+     * @return boolean        [description]
+     */
+    public function hasAnyRole(string $role)
+    {
+        return null !== $this->roles()->where('name', $role)->first();
+    }
+
+    /**
+     * Check apakah user memiliki salah satu dari role
+     * @param  array $roles [description]
+     * @return boolean        [description]
+     */
+    public function hasAnyRoles(array $roles)
+    {
+        return null !== $this->roles()->whereIn('name', $roles)->first();
+    }
 }

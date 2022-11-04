@@ -38,6 +38,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 
 // Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'auth.roles'])->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
 });
