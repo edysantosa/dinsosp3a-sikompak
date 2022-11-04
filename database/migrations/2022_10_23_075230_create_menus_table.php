@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyInteger('sort_order')->default(0);
             $table->string('slug', 255)->default(null);
             $table->string('icon', 255)->default('');
+            $table->string('allowed_gates', 255)->default(null);
             $table->timestamps();
         });
     }

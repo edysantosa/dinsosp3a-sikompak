@@ -28,8 +28,6 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/login', [LoginController::class, 'store']);
 // Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
 
 // Authentication Routes
 Route::prefix('auth')->name('auth.')->group(function () {
@@ -37,7 +35,9 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::resource('/logout', LogoutController::class);
 });
 
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('dashboard');
+
 // Admin Routes
-Route::prefix('admin')->middleware(['auth', 'auth.roles'])->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'auth.roles:is-admin'])->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
 });

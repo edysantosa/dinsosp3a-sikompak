@@ -9,19 +9,23 @@ use Illuminate\Support\Facades\Gate;
 class Roles
 {
     /**
-     * Handle an incoming request.
+     * Middleware untuk setting gate berdasarkan role yang ada, pass parameter nama-nama gate yang bisa melewati middleware ini.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$allowedGates)
     {
-        if (Gate::allows('is-admin')) {
-            return $next($request);
-        }
+        // if (Gate::allows('is-admin')) {
+        //     return $next($request);
+        // }
+        // // return redirect('/');
 
-        // return redirect('/');
-        return abort(404);
+        if (Gate::any($allowedGates)) {
+            return $next($request);
+        } else {
+            return abort(404);
+        }
     }
 }
