@@ -14,10 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::Create([
+        $user = \App\Models\User::Create([
             'name' => "Dinas Sosial P3A Prov. Bali",
             'email' => 'dinsosp3a@baliprov.go.id',
             'password' => Hash::make('123'),
         ]);
+
+        // Berikan role admin
+        $user->roles()->attach(\App\Models\Role::where('name', 'admin')->first()->value('id'));
     }
 }
