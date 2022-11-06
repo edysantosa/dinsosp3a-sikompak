@@ -18,6 +18,9 @@ $(document).ready(function() {
                 required: true,
                 minlength: 3
             },
+            password_confirmation: {
+                equalTo: "#password"
+            },
         },
         messages: {
             email: {
@@ -27,6 +30,9 @@ $(document).ready(function() {
             password: {
                 required: "Masukkan kata sandi",
                 minlength: "Kata sandi minimal 3 karakter"
+            },
+            password_confirmation: {
+                equalTo: "Kata sandi harus sama"
             },
         },
         errorElement: 'span',
