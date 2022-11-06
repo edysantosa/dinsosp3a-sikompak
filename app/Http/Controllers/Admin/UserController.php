@@ -22,10 +22,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // if (Gate::denies('is-admin')) {
-        //     abort(404);
-        // }
-
         if ($request->ajax()) {
             return DataTables::eloquent(
                 User::query()
