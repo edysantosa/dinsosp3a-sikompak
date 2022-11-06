@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
@@ -23,17 +24,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('layouts.main');
 // });
 
-// Authentication
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
-// Route::post('/login', [LoginController::class, 'store']);
-// Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
-
 // Authentication Routes
 Route::prefix('auth')->name('auth.')->group(function () {
-    Route::resource('/login', LoginController::class);
-    Route::resource('/logout', LogoutController::class);
+    Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login.index');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot.index');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot.store');
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout.store');
 });
+Route::get('/reset-password', [ForgotPasswordController::class, 'reset'])->middleware('guest')->name('password.reset'); // namanya harus password.reset, hardcoded di laravel
+
+
+
+// Route::get('/forgot-password', function () {
+//     return view('auth.forgot-password');
+// })->middleware('guest')->name('password.request');
 
 Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('dashboard');
 
