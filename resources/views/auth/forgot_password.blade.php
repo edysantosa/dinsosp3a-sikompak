@@ -10,7 +10,7 @@
         <form id="login-form" action="{{ route('auth.forgot.store') }}" method="post">
             @csrf
             <div class="input-group mb-3">
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') }}" @if (session('info')) disabled @endif>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Minta password baru</button>
+                    <button type="submit" class="btn btn-primary btn-block" @if (session('info')) disabled @endif>Minta password baru</button>
                 </div>
             </div>
         </form>

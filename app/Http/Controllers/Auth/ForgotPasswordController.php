@@ -58,7 +58,7 @@ class ForgotPasswordController extends Controller
         );
  
         return $status === Password::PASSWORD_RESET
-                ? redirect()->route('auth.login.index')->with('status', __($status))
+                ? redirect()->route('auth.login.index')->with('info', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
     }
 }
