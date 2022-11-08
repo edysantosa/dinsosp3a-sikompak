@@ -66,7 +66,7 @@
                             <img src="{{ asset('dist/images/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Natalia Sihombing</a>
+                            <a href="{{ route('user.profile.index') }}" class="d-block">Natalia Sihombing</a>
                         </div>
                     </div>
                     @include('layouts.menu')

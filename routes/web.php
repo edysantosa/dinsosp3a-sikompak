@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PsksController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,16 +35,15 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 Route::get('/reset-password', [ForgotPasswordController::class, 'reset'])->middleware('guest')->name('password.reset'); // namanya harus password.reset, hardcoded di laravel
 Route::post('/reset-password', [ForgotPasswordController::class, 'change'])->middleware('guest')->name('password.change');
-
-
-
-// Route::get('/forgot-password', function () {
-//     return view('auth.forgot-password');
-// })->middleware('guest')->name('password.request');
-
+ 
 Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('dashboard');
 
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'auth.roles:is-admin'])->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
+});
+
+// User route
+Route::prefix('user')->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('user.')->group(function () {
+    Route::get('/profile', ProfileController::class)->name('profile.index');
 });
