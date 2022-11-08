@@ -16,17 +16,22 @@ class ProfileController extends Controller
     {
 
         $user = $request->user();
-        if($request->file('image')) {
-            $user
-            ->clearMediaCollection('profile')
-            ->addMediaFromRequest('image')
-            ->usingName($user->name)
-            ->usingFileName($user->name.".".$request->file('image')->extension())
-            ->toMediaCollection('profile');
-            // $createUser->update(['avatar' => $request->file('avatar')]);
-        } else {
+        if ($request->file('image')) {
+            // $user
+            // ->clearMediaCollection('profile')
+            // ->addMediaFromRequest('image')
+            // ->usingName($user->name)
+            // ->usingFileName($user->name.".".$request->file('image')->extension())
+            // ->toMediaCollection('profile');
+
+            return response()->json(['image' => $user->getFirstMediaUrl('profile')]);
+        } elseif ($request->exists('password')) {
+            $this->validate($request, [
+                'password' => 'required|max:255|confirmed',
+            ]);
+
+            $user->update(['password' => $request->password]);
             return back()->withFragment('password')->with(['info' => 'asdasdasd']);
-            dd($request->exists('password'));
         }
 
 

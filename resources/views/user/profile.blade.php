@@ -30,7 +30,8 @@
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
                         src="../../dist/img/user4-128x128.jpg"
-                        alt="User profile picture">
+                        alt="User profile picture" role="button">
+
                         <form id="image-form" action="{{ route('user.profile.store') }}" method="post">
                             @csrf
                             <input type="file" id="image" name="image" style="display:none">
@@ -73,7 +74,7 @@
                                 <div class="form-group row">
                                     <label for="user-password" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="user-password" name="password" placeholder="Password">
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
 
                                         @error('password')
                                         <span class="error invalid-feedback">

@@ -63,6 +63,6 @@
 </div>
 <!-- /.card-body -->
 <div class="card-footer">
-    <button type="submit" class="btn btn-info float-right">Simpan</button>
+    <button type="submit" class="btn btn-primary float-right">Simpan</button>
 </div>
 <!-- /.card-footer -->

@@ -1,9 +1,10 @@
 require('./app');
 require ('../adminlte/plugins/jquery-validation/jquery.validate.min.js');
 require ('../adminlte/plugins/jquery-validation/additional-methods.min.js');
+import toastr from '../adminlte/plugins/toastr/toastr.min.js';
 
 $(document).ready(function() {
-    $('#user-create-form').validate({
+    $('#profile-form').validate({
         rules: {
             name: {
                 required: true,
@@ -15,6 +16,9 @@ $(document).ready(function() {
             password: {
                 required: true,
                 minlength: 3
+            },
+            password_confirmation: {
+                equalTo: "#password"
             },
         },
         messages: {
@@ -28,6 +32,9 @@ $(document).ready(function() {
             password: {
                 required: "Masukkan kata sandi",
                 minlength: "Kata sandi minimal 3 karakter"
+            },
+            password_confirmation: {
+                equalTo: "Kata sandi harus sama"
             },
         },
         errorElement: 'span',
@@ -54,21 +61,24 @@ $(document).ready(function() {
         data : formData,
         cache: false,
         contentType: false,
-        processData: false
-    })
-    
-    .fail(function(xhr){
+        processData: false,
+        beforeSend: function() {
+            $('.profile-user-img').hide();
+            $('.profile-user-img').parent().append('<span><i class="fas fa-spin fa-circle-notch"></i></span>');
+        },
+        complete: function() {
+            $('.profile-user-img').show();
+            $('.profile-user-img').parent().find('span').remove();
+        },
+    }).fail(function(xhr){
         var message = "Unknown error has occured";
         if( xhr.responseJSON ){
             message = xhr.responseJSON.message;
         }
 
-        Notification.error(message);
-    })
-    
-    .done(function( response ){
-        Notification.info(response.message);
-        $(".profile-image").attr("src", response.image);
+        toastr.error(message);
+    }).done(function( response ){
+        $(".profile-user-img").attr("src", response.image);
     });
 
     return false;
