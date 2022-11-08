@@ -29,4 +29,10 @@ $(document).ready(function() {
     if (store.get('sidebar' , null) == 0) {
         $('[data-widget="pushmenu"]').PushMenu('collapse');
     }
+
+    // Aktifkan tab berdasarkan fragment di url
+    let hash = window.location.hash;
+    if (hash.match('#')) {
+        $('.nav-tabs a[href="#' + hash.split('#')[1] + '"]').tab('show');
+    } 
 });

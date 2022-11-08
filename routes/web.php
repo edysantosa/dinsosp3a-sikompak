@@ -45,5 +45,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.roles:is-admin'])->name('admin
 
 // User route
 Route::prefix('user')->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('user.')->group(function () {
-    Route::get('/profile', ProfileController::class)->name('profile.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
 });
