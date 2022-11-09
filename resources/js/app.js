@@ -20,11 +20,9 @@ $(document).ready(function() {
     // Simpan status menu collapsed
     $(document).on('collapsed.lte.pushmenu', '[data-widget="pushmenu"]', function () {
         store.set('sidebar' , 0);
-        console.log(store.get('sidebar'));
     });
     $(document).on('shown.lte.pushmenu', '[data-widget="pushmenu"]', function () {
         store.set('sidebar' , 1);
-        console.log(store.get('sidebar'));
     });
     if (store.get('sidebar' , null) == 0) {
         $('[data-widget="pushmenu"]').PushMenu('collapse');
