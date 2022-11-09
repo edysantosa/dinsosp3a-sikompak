@@ -11,16 +11,19 @@
     },
     "devDependencies": {
         "axios": "^0.25",
+        "bootbox": "^5.5.3",
         "bootstrap": "^4.6.1",
         "datatables.net-bs4": "^1.12.1",
         "datatables.net-buttons-bs4": "^2.2.3",
+        "datatables.net-plugins": "^1.11.5",
         "datatables.net-responsive-bs4": "^2.3.0",
         "datatables.net-select-bs4": "^1.4.0",
         "jquery": "^3.6.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "store": "^2.0.12"
     },
     "overrides": {
         "autoprefixer": "10.4.5"
