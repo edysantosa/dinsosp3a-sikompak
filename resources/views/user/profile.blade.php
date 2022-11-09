@@ -56,20 +56,54 @@
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="edit-profile" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profle" role="tab" aria-controls="profle" aria-selected="true">Edit Profile</a>
+                            <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile-content" role="tab" aria-controls="profile-content" aria-selected="true">Edit Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">Update Password</a>
+                            <a class="nav-link" id="password-tab" data-toggle="pill" href="#password-content" role="tab" aria-controls="password" aria-selected="false">Update Password</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="edit-profileContent">
-                        <div class="tab-pane fade show active" id="profle" role="tabpanel" aria-labelledby="profile-tab">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                        <div class="tab-pane fade show active" id="profile-content" role="tabpanel" aria-labelledby="profile-tab">
+                            <form class="profile-form form-horizontal" action="{{ route('user.profile.store') }}" method="post">
+                                @csrf
+                                <div class="form-group row">
+                                    <label for="user-name" class="col-sm-2 col-form-label">Nama</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="user-name" name="name" placeholder="Nama" 
+                                        value="{{old('name') ? old('name') : auth()->user()->name}}">
+
+                                        @error('name')
+                                        <span class="error invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="user-email" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="user-email" name="email" placeholder="Email"
+                                        value="{{old('email') ? old('email') : auth()->user()->email}}">
+
+                                        @error('email')
+                                        <span class="error invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
                         </div>
-                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                            <form id="profile-form" class="form-horizontal" action="{{ route('user.profile.store') }}" method="post">
+                        <div class="tab-pane fade" id="password-content" role="tabpanel" aria-labelledby="password-tab">
+                            <form class="profile-form form-horizontal" action="{{ route('user.profile.store') }}" method="post">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="user-password" class="col-sm-2 col-form-label">Password</label>

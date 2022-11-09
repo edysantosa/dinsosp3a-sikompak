@@ -4,7 +4,7 @@
         <label for="user-name" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="user-name" name="name" placeholder="Nama" 
-            value="@isset($user){{ $user->name }}@else{{ old('username') }}@endisset">
+            value="@isset($user){{ $user->name }}@else{{ old('name') }}@endisset">
 
             @error('name')
             <span class="error invalid-feedback">

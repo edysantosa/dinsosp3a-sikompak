@@ -31,13 +31,15 @@ class ProfileController extends Controller
             ]);
 
             $user->update(['password' => $request->password]);
-            return back()->withFragment('password')->with(['info' => 'asdasdasd']);
+            return back()->withFragment('password-content')->with(['info' => 'Kata sandi telah diubah']);
+        } else {
+            $this->validate($request, [
+                'name'  => 'required|max:255',
+                'email' => 'required|max:255|email|unique:users,email,' . $user->id
+            ]);
+
+            $user->update($request->except('_token', 'roles'));
+            return back()->with(['info' => 'Profil telah diubah']);
         }
-
-
-        // $user->update($request->except('_token'));
-        // $user->roles()->sync($request->roles);
-
-        // return redirect(route('user.profile.index'));
     }
 }

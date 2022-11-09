@@ -4,7 +4,7 @@ require ('../adminlte/plugins/jquery-validation/additional-methods.min.js');
 import toastr from '../adminlte/plugins/toastr/toastr.min.js';
 
 $(document).ready(function() {
-    $('#profile-form').validate({
+    $('.profile-form').validate({
         rules: {
             name: {
                 required: true,
