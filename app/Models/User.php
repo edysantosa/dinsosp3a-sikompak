@@ -80,11 +80,26 @@ class User extends Authenticatable implements HasMedia
     }
 
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaCollections(): void
     {
         $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 100, 100)
-            ->nonQueued();
+            ->addMediaCollection('profile')
+            ->useFallbackUrl('/dist/images/default-user.jpg')
+            ->useFallbackPath(public_path('/dist/images/default-user.jpg'))
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->fit(Manipulations::FIT_CROP, 100, 100)
+                    ->nonQueued();
+                    $this
+                    ->addMediaConversion('thumb_small')
+                    ->fit(Manipulations::FIT_CROP, 60, 60)
+                    ->nonQueued();
+                    
+                // $this
+                //     ->addMediaConversion('thumb')
+                //     ->width(100)
+                //     ->height(100);
+            });
     }
 }

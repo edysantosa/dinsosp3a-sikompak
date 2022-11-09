@@ -29,7 +29,7 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                        src="../../dist/img/user4-128x128.jpg"
+                        src="{{ auth()->user()->getFirstMediaUrl('profile', 'thumb') }}"
                         alt="User profile picture" role="button">
 
                         <form id="image-form" action="{{ route('user.profile.store') }}" method="post">

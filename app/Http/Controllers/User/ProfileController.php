@@ -17,14 +17,14 @@ class ProfileController extends Controller
 
         $user = $request->user();
         if ($request->file('image')) {
-            // $user
-            // ->clearMediaCollection('profile')
-            // ->addMediaFromRequest('image')
-            // ->usingName($user->name)
-            // ->usingFileName($user->name.".".$request->file('image')->extension())
-            // ->toMediaCollection('profile');
+            $user
+            ->clearMediaCollection('profile')
+            ->addMediaFromRequest('image')
+            ->usingName($user->name)
+            ->usingFileName($user->name.".".$request->file('image')->extension())
+            ->toMediaCollection('profile');
 
-            return response()->json(['image' => $user->getFirstMediaUrl('profile')]);
+            return response()->json(['image' => $user->getFirstMediaUrl('profile', 'thumb')]);
         } elseif ($request->exists('password')) {
             $this->validate($request, [
                 'password' => 'required|max:255|confirmed',
