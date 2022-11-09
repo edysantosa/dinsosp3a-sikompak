@@ -72,7 +72,7 @@
                                     <label for="user-name" class="col-sm-2 col-form-label">Nama</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="user-name" name="name" placeholder="Nama" 
-                                        value="{{old('name') ? old('name') : auth()->user()->name}}">
+                                        value="{{old('name') ?? auth()->user()->name ?? ""}}">
 
                                         @error('name')
                                         <span class="error invalid-feedback">
@@ -85,7 +85,7 @@
                                     <label for="user-email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="user-email" name="email" placeholder="Email"
-                                        value="{{old('email') ? old('email') : auth()->user()->email}}">
+                                        value="{{old('email') ?? auth()->user()->email ?? ""}}">
 
                                         @error('email')
                                         <span class="error invalid-feedback">
