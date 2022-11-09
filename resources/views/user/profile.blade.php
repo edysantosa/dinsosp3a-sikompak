@@ -37,12 +37,8 @@
                             <input type="file" id="image" name="image" style="display:none">
                         </form>
                     </div>
-
-                    <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-                    <p class="text-muted text-center">Software Engineer</p>
-
-                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                    <h3 class="profile-username text-center">{{ auth()->user()->name }}</h3>
+                    <p class="text-muted text-center">{{ auth()->user()->roles->pluck('name')->implode(', ') }}</p>
                 </div>
                 <!-- /.card-body -->
             </div>

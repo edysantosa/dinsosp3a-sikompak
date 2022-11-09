@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sikompak</title>
+        <link rel="icon" href="{{ asset('dist/images/favicon.png') }}">
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Main App CSS -->
@@ -25,8 +26,10 @@
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
-                    @include('layouts.top_message')
-                    @include('layouts.top_notification')
+                    {{-- TODO --}}
+                    {{-- Buat mekanisme notifikasi pesan/logging/semacamnya --}}
+                    {{-- @include('layouts.top_message') --}}
+                    {{-- @include('layouts.top_notification') --}}
 
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -66,7 +69,7 @@
                             <img src="{{ auth()->user()->getFirstMediaUrl('profile', 'thumb_small') }}" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="{{ route('user.profile.index') }}" class="d-block">Natalia Sihombing</a>
+                            <a href="{{ route('user.profile.index') }}" class="d-block">{{ auth()->user()->name }}</a>
                         </div>
                     </div>
                     @include('layouts.menu')
