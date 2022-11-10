@@ -38,10 +38,10 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <form action="{{ route('auth.logout.store') }}" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item dropdown-footer"><i class="fas fa-user mr-1"></i> Logout</button>
+                                <button type="submit" class="dropdown-item dropdown-footer"><i class="fas fa-undo mr-1"></i> Logout</button>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">Edit Profil</a>
+                            <a href="{{ route('user.profile.index') }}" class="dropdown-item dropdown-footer"><i class="fas fa-user-edit mr-1"></i>Edit Profil</a>
                         </div>
                     </li>
                     <li class="nav-item">
