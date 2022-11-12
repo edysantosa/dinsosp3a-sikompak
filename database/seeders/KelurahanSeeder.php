@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Provinsi;
+use App\Models\Kelurahan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class ProvinsiSeeder extends Seeder
+class KelurahanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,17 +17,18 @@ class ProvinsiSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        Provinsi::truncate();
+        Kelurahan::truncate();
         Schema::enableForeignKeyConstraints();
   
-        $csvFile = fopen(base_path("database/data/provinsi.csv"), "r");
+        $csvFile = fopen(base_path("database/data/kelurahan.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== false) {
             if (!$firstline) {
-                Provinsi::create([
+                Kelurahan::create([
                     "id" => $data['0'],
-                    "nama" => $data['1']
+                    "kecamatan_id" => $data['1'],
+                    "nama" => $data['2'],
                 ]);
             }
             $firstline = false;
