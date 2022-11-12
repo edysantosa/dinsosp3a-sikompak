@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('kecamatan_id', 13);
             $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('cascade');
             $table->string('nama', 255);
-            $table->timestamps();
         });
     }
 

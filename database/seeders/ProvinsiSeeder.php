@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Provinsi;
+use File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class ProvinsiSeeder extends Seeder
@@ -19,20 +21,19 @@ class ProvinsiSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         Provinsi::truncate();
         Schema::enableForeignKeyConstraints();
+        DB::disableQueryLog();//disable log
+
+        $json = File::get(base_path("database/data/provinsi.json"));
+        $provinsis = json_decode($json, true);
   
-        $csvFile = fopen(base_path("database/data/provinsi.csv"), "r");
-  
-        $firstline = true;
-        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
-            if (!$firstline) {
-                Provinsi::create([
-                    "id" => $data['0'],
-                    "nama" => $data['1']
-                ]);
-            }
-            $firstline = false;
+        // foreach ($provinsis as $key => $value) {
+        //     Provinsi::create($value);
+        // }
+
+
+        $chunks = array_chunk($provinsis, 5000);
+        foreach ($chunks as $chunk) {
+            Provinsi::insert($chunk);
         }
-   
-        fclose($csvFile);
     }
 }

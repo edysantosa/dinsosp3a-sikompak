@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('provinsi_id', 13);
             $table->foreign('provinsi_id')->references('id')->on('provinsi')->onDelete('cascade');
             $table->string('nama', 255);
-            $table->timestamps();
         });
     }
 

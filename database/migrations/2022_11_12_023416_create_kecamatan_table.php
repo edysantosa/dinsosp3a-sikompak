@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('kabupaten_kota_id', 13);
             $table->foreign('kabupaten_kota_id')->references('id')->on('kabupaten_kota')->onDelete('cascade');
             $table->string('nama', 255);
-            $table->timestamps();
         });
     }
 
