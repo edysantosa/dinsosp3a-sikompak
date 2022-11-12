@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Kelurahan;
+use File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class KelurahanSeeder extends Seeder
@@ -19,21 +21,14 @@ class KelurahanSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         Kelurahan::truncate();
         Schema::enableForeignKeyConstraints();
-  
-        $csvFile = fopen(base_path("database/data/kelurahan.csv"), "r");
-  
-        $firstline = true;
-        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
-            if (!$firstline) {
-                Kelurahan::create([
-                    "id" => $data['0'],
-                    "kecamatan_id" => $data['1'],
-                    "nama" => $data['2'],
-                ]);
-            }
-            $firstline = false;
+        DB::disableQueryLog();//disable log
+
+        $json = File::get(base_path("database/data/kelurahan.json"));
+        $kelurahans = json_decode($json, true);
+
+        $chunks = array_chunk($kelurahans, 5000);
+        foreach ($chunks as $chunk) {
+            Kelurahan::insert($chunk);
         }
-   
-        fclose($csvFile);
     }
 }

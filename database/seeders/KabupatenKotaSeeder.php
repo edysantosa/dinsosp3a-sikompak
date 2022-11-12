@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\KabupatenKota;
+use File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class KabupatenKotaSeeder extends Seeder
@@ -19,21 +21,14 @@ class KabupatenKotaSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         KabupatenKota::truncate();
         Schema::enableForeignKeyConstraints();
-  
-        $csvFile = fopen(base_path("database/data/kabupaten_kota.csv"), "r");
-  
-        $firstline = true;
-        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
-            if (!$firstline) {
-                KabupatenKota::create([
-                    "id" => $data['0'],
-                    "provinsi_id" => $data['1'],
-                    "nama" => $data['2'],
-                ]);
-            }
-            $firstline = false;
+        DB::disableQueryLog();//disable log
+
+        $json = File::get(base_path("database/data/kabupaten_kota.json"));
+        $kabupatenKotas = json_decode($json, true);
+
+        $chunks = array_chunk($kabupatenKotas, 5000);
+        foreach ($chunks as $chunk) {
+            KabupatenKota::insert($chunk);
         }
-   
-        fclose($csvFile);
     }
 }

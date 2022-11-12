@@ -25,11 +25,6 @@ class ProvinsiSeeder extends Seeder
 
         $json = File::get(base_path("database/data/provinsi.json"));
         $provinsis = json_decode($json, true);
-  
-        // foreach ($provinsis as $key => $value) {
-        //     Provinsi::create($value);
-        // }
-
 
         $chunks = array_chunk($provinsis, 5000);
         foreach ($chunks as $chunk) {
