@@ -23,7 +23,7 @@ class KabupatenKotaSeeder extends Seeder
         $csvFile = fopen(base_path("database/data/kabupaten_kota.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== false) {
+        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
             if (!$firstline) {
                 KabupatenKota::create([
                     "id" => $data['0'],

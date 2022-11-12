@@ -23,7 +23,7 @@ class KelurahanSeeder extends Seeder
         $csvFile = fopen(base_path("database/data/kelurahan.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== false) {
+        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
             if (!$firstline) {
                 Kelurahan::create([
                     "id" => $data['0'],

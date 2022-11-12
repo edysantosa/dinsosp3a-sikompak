@@ -23,7 +23,7 @@ class ProvinsiSeeder extends Seeder
         $csvFile = fopen(base_path("database/data/provinsi.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== false) {
+        while (($data = fgetcsv($csvFile, 1000, ",")) !== false) {
             if (!$firstline) {
                 Provinsi::create([
                     "id" => $data['0'],
