@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
         ]);
 
         // Berikan role admin
-        $user->roles()->attach(\App\Models\Role::where('name', 'admin')->first()->value('id'));
+        $user->roles()->attach(\App\Models\Role::where('name', 'administrator')->first()->value('id'));
     }
 }
