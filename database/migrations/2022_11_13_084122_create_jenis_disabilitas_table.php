@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('jenis_disabilitas', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 255);
-            $table->timestamps();
         });
     }
 
