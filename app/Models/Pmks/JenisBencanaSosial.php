@@ -10,4 +10,5 @@ class JenisBencanaSosial extends Model
     use HasFactory;
 
     protected $table = 'jenis_bencana_sosial';
+    public $timestamps = false;
 }

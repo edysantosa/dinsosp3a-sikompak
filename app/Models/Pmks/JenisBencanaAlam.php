@@ -10,4 +10,5 @@ class JenisBencanaAlam extends Model
     use HasFactory;
 
     protected $table = 'jenis_bencana_alam';
+    public $timestamps = false;
 }

@@ -10,4 +10,5 @@ class JenisDisabilitas extends Model
     use HasFactory;
 
     protected $table = 'jenis_disabilitas';
+    public $timestamps = false;
 }

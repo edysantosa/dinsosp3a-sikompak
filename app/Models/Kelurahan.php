@@ -12,4 +12,5 @@ class Kelurahan extends Model
     protected $table = 'kelurahan';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 }

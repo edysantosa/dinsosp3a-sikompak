@@ -5,10 +5,9 @@ namespace App\Models\Pmks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JenisKekerasan extends Model
+class LembagaKesejahteraanSosial extends Model
 {
     use HasFactory;
 
-    protected $table = 'jenis_kekerasan';
-    public $timestamps = false;
+    protected $table = 'lembaga_kesejahteraan_sosial';
 }
