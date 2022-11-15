@@ -14,30 +14,39 @@ class JenisBencanaAlamSeeder extends Seeder
      */
     public function run()
     {
+        // Menurut UU No. 24 Tahun 2007
         $bencanas = [
             [
                 'id' => '1',
-                'nama' => 'Disabilitas fisik',
+                'nama' => 'Tanah Longsor',
             ],
             [
                 'id' => '2',
-                'nama' => 'Disabilitas intelektual',
+                'nama' => 'Gempa Bumi',
             ],
             [
                 'id' => '3',
-                'nama' => 'Disabilitas mental',
+                'nama' => 'Tsunami',
             ],
             [
                 'id' => '4',
-                'nama' => 'Disabilitas netra',
+                'nama' => 'Banjir',
             ],
             [
                 'id' => '5',
-                'nama' => 'Disabilitas rungu',
+                'nama' => 'Letusan Gunung Api',
             ],
             [
                 'id' => '6',
-                'nama' => 'Disabilitas wicara',
+                'nama' => 'Angin topan',
+            ],
+            [
+                'id' => '7',
+                'nama' => 'Kekeringan',
+            ],
+            [
+                'id' => '8',
+                'nama' => 'Kebakaran Hutan',
             ],
         ];
         foreach ($bencanas as $bencana) {

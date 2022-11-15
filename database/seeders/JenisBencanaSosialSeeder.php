@@ -14,30 +14,19 @@ class JenisBencanaSosialSeeder extends Seeder
      */
     public function run()
     {
+        // Menurut UU No. 24 Tahun 2007
         $bencanas = [
             [
                 'id' => '1',
-                'nama' => 'Disabilitas fisik',
+                'nama' => 'Konflik Sosial',
             ],
             [
                 'id' => '2',
-                'nama' => 'Disabilitas intelektual',
+                'nama' => 'Aksi Teror',
             ],
             [
                 'id' => '3',
-                'nama' => 'Disabilitas mental',
-            ],
-            [
-                'id' => '4',
-                'nama' => 'Disabilitas netra',
-            ],
-            [
-                'id' => '5',
-                'nama' => 'Disabilitas rungu',
-            ],
-            [
-                'id' => '6',
-                'nama' => 'Disabilitas wicara',
+                'nama' => 'Sabotase',
             ],
         ];
         foreach ($bencanas as $bencana) {

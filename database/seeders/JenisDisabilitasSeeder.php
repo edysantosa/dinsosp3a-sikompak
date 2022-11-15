@@ -14,6 +14,7 @@ class JenisDisabilitasSeeder extends Seeder
      */
     public function run()
     {
+        // Menurut UU. No. 8 Th. 2016
         $disabilities = [
             [
                 'id' => '1',
@@ -29,15 +30,7 @@ class JenisDisabilitasSeeder extends Seeder
             ],
             [
                 'id' => '4',
-                'nama' => 'Disabilitas netra',
-            ],
-            [
-                'id' => '5',
-                'nama' => 'Disabilitas rungu',
-            ],
-            [
-                'id' => '6',
-                'nama' => 'Disabilitas wicara',
+                'nama' => 'Disabilitas sensorik',
             ],
         ];
         foreach ($disabilities as $disability) {

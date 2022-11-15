@@ -17,27 +17,19 @@ class JenisKekerasanSeeder extends Seeder
         $kekerasans = [
             [
                 'id' => '1',
-                'nama' => 'Disabilitas fisik',
+                'nama' => 'Kekerasan Fisik',
             ],
             [
                 'id' => '2',
-                'nama' => 'Disabilitas intelektual',
+                'nama' => 'Kekerasan Psikis',
             ],
             [
                 'id' => '3',
-                'nama' => 'Disabilitas mental',
+                'nama' => 'Kekerasan Seksual',
             ],
             [
-                'id' => '4',
-                'nama' => 'Disabilitas netra',
-            ],
-            [
-                'id' => '5',
-                'nama' => 'Disabilitas rungu',
-            ],
-            [
-                'id' => '6',
-                'nama' => 'Disabilitas wicara',
+                'id' => '9',
+                'nama' => 'Kekerasan Lainnya',
             ],
         ];
         foreach ($kekerasans as $kekerasan) {
