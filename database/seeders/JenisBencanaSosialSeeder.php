@@ -14,19 +14,31 @@ class JenisBencanaSosialSeeder extends Seeder
      */
     public function run()
     {
-        // Menurut UU No. 24 Tahun 2007
+        // Menurut Permensos No.9 2018
         $bencanas = [
             [
                 'id' => '1',
-                'nama' => 'Konflik Sosial',
+                'nama' => 'Konflik sosial',
             ],
             [
                 'id' => '2',
-                'nama' => 'Aksi Teror',
+                'nama' => 'Aksi teror',
             ],
             [
                 'id' => '3',
-                'nama' => 'Sabotase',
+                'nama' => 'Kebakaran pemukiman dan gedung',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Wabah/epidemi',
+            ],
+            [
+                'id' => '5',
+                'nama' => 'Gagal teknologi',
+            ],
+            [
+                'id' => '6',
+                'nama' => 'Kebakaran hutan dan lahan',
             ],
         ];
         foreach ($bencanas as $bencana) {
