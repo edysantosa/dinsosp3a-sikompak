@@ -50,6 +50,7 @@ return new class extends Migration
             $table->boolean('is_pmbs')->default(0)->comment('Pekerja Migran Bermasalah Sosial');
             $table->boolean('is_perempuan_rawan_sosial')->default(0);
             $table->boolean('is_keluarga_bermasalah_sosial')->default(0);
+            $table->boolean('is_dtks')->default(0)->comment('Apakah masuk atau tidak di DTKS');
 
 
             $table->string('delete_reason')->nullable()->comment('Alasan data dihapus oleh user');
