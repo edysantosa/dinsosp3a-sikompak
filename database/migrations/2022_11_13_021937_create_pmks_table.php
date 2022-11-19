@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
 
 
+            $table->string('anak_berhadapan_hukum')->nullable()->comment('Status anak yang berhadapan dengan hukum');
             $table->boolean('is_tuna_susila')->default(0);
             $table->boolean('is_pemulung')->default(0);
             $table->boolean('is_kelompok_minoritas')->default(0);
