@@ -30,4 +30,40 @@ class Pmks extends Model
     {
         return $this->belongsTo('App\Models\Kelurahan');
     }
+
+    // Lanjut usia terlantar
+    public function lanjutUsiaTerlantar()
+    {
+        return $this->belongsTo('App\Models\Pmks\LanjutUsiaTerlantar');
+    }
+
+    // Gelandangan
+    public function gelandangan()
+    {
+        return $this->belongsTo('App\Models\Pmks\LanjutUsiaTerlantar');
+    }
+
+    // Pengemis
+    public function pengemis()
+    {
+        return $this->belongsTo('App\Models\Pmks\Pengemis');
+    }
+
+    // Korban bencana alam
+    public function korbanBencanaAlam()
+    {
+        return $this->belongsTo('App\Models\Pmks\KorbanBencanaAlam');
+    }
+
+    // Korban bencana sosial
+    public function korbanBencanaSosial()
+    {
+        return $this->belongsTo('App\Models\Pmks\KorbanBencanaSosial');
+    }
+
+    // Komunitas adat terpencil
+    public function komunitasAdatTerpencil()
+    {
+        return $this->belongsTo('App\Models\Pmks\KomunitasAdatTerpencil');
+    }
 }

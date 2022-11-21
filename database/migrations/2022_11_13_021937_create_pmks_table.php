@@ -24,17 +24,17 @@ return new class extends Migration
             $table->string('nomor_rekening')->nullable();
             $table->string('bank_nomor_rekening')->nullable()->comment('nama bank untuk nomor_rekening');
             $table->string('nama');
-            $table->tinyInteger('jenis_kelamin')->comment('sesuai ISO/IEC 5218');
+            $table->unsignedTinyInteger('jenis_kelamin')->comment('sesuai ISO/IEC 5218');
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir');
 
-            $table->string('provinsi_id', 13);
+            $table->string('provinsi_id', 13)->nullable();
             $table->foreign('provinsi_id')->references('id')->on('provinsi')->onDelete('restrict');
-            $table->string('kabupaten_kota_id', 13);
+            $table->string('kabupaten_kota_id', 13)->nullable();
             $table->foreign('kabupaten_kota_id')->references('id')->on('kabupaten_kota')->onDelete('restrict');
-            $table->string('kecamatan_id', 13);
+            $table->string('kecamatan_id', 13)->nullable();
             $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('restrict');
-            $table->string('kelurahan_id', 13);
+            $table->string('kelurahan_id', 13)->nullable();
             $table->foreign('kelurahan_id')->references('id')->on('kelurahan')->onDelete('restrict');
             $table->string('alamat')->nullable();
 

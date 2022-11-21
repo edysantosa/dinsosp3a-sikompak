@@ -5,11 +5,11 @@ namespace App\Models\Pmks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LanjutUsiaTerlantar extends Model
+class Pengemis extends Model
 {
     use HasFactory;
 
-    protected $table = 'lanjut_usia_terlantar';
+    protected $table = 'pengemis';
     public $timestamps = false;
 
     public function lembagaPenampung()
