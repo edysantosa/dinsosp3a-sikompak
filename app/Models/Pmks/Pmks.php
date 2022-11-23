@@ -66,4 +66,40 @@ class Pmks extends Model
     {
         return $this->belongsTo('App\Models\Pmks\KomunitasAdatTerpencil');
     }
+
+    // Anak / balita terlantar
+    public function anakBalitaTerlantar()
+    {
+        return $this->belongsTo('App\Models\Pmks\AnakBalitaTerlantar');
+    }
+
+    // Anak jalanan
+    public function anakJalanan()
+    {
+        return $this->belongsTo('App\Models\Pmks\AnakJalanan');
+    }
+
+    // Anak perlu perlindungan
+    public function anakPerluPerlindungan()
+    {
+        return $this->belongsTo('App\Models\Pmks\AnakPerluPerlindungan');
+    }
+
+    // Anak korban kekerasan
+    public function anakKorbanKekerasan()
+    {
+        return $this->belongsTo('App\Models\Pmks\AnakKorbanKekerasan');
+    }
+
+    // Korban kekerasan
+    public function korbanKekerasan()
+    {
+        return $this->belongsTo('App\Models\Pmks\KorbanKekerasan');
+    }
+
+    // Anak disabilitas
+    public function anakDisabilitas()
+    {
+        return $this->belongsTo('App\Models\Pmks\AnakDisabilitas');
+    }
 }
