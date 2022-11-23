@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PmksController;
 use App\Http\Controllers\PsksController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\User\ProfileController;
@@ -48,3 +49,6 @@ Route::prefix('user')->middleware(['auth', 'auth.roles:is-admin,is-user'])->name
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
 });
+
+// PMKS Routes
+Route::resource('/pmks', PmksController::class)->middleware(['auth', 'auth.roles:is-admin,is-user']);

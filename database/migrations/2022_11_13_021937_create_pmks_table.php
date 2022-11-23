@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nik', 16)->nullable();
             $table->string('kartu_keluarga', 16)->nullable();
             $table->string('bpjs_kesehatan', 13)->nullable();
-            $table->string('kartu_indonesia_sehat', 13)->nullable();
+            $table->boolean('is_kartu_indonesia_sehat')->default(0)->comment('Kalau true berarti pemegang program JKN-KIS');
             $table->string('kartu_indonesia_pintar', 6)->nullable();
             $table->string('nomor_rekening')->nullable();
             $table->string('bank_nomor_rekening')->nullable()->comment('nama bank untuk nomor_rekening');
