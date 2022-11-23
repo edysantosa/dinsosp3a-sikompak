@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pmks;
+namespace App\Models\Psks;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -14,7 +14,7 @@ class AnakDisabilitas extends Model
 
     public function lembagaPenampung()
     {
-        return $this->belongsTo('App\Models\Pmks\LembagaKesejahteraanSosial');
+        return $this->belongsTo('App\Models\Psks\LembagaKesejahteraanSosial');
     }
 
     public function disabilitas()
