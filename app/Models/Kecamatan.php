@@ -12,4 +12,5 @@ class Kecamatan extends Model
     protected $table = 'kecamatan';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 }

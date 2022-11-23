@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Pmks;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kelurahan extends Model
+class KomunitasAdatTerpencil extends Model
 {
     use HasFactory;
 
-    protected $table = 'kelurahan';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $table = 'komunitas_adat_terpencilu';
     public $timestamps = false;
 }

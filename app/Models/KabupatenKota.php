@@ -12,4 +12,5 @@ class KabupatenKota extends Model
     protected $table = 'kabupaten_kota';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 }

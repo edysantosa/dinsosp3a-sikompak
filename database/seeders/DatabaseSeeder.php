@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call([KabupatenKotaSeeder::class]);
         $this->call([KecamatanSeeder::class]);
         $this->call([KelurahanSeeder::class]);
+        $this->call([JenisDisabilitasSeeder::class]);
+        $this->call([JenisKekerasanSeeder::class]);
+        $this->call([JenisBencanaSosialSeeder::class]);
+        $this->call([JenisBencanaAlamSeeder::class]);
     }
 }

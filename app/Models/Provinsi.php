@@ -16,4 +16,5 @@ class Provinsi extends Model
     // protected $primaryKey = 'your_key_name';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 }
