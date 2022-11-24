@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_keluarga')->nullable();
             $table->string('hubungan_keluarga')->nullable();
-            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id');
+            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id')->nullable();
             $table->foreign('lembaga_kesejahteraan_sosial_id')->references('id')->on('lembaga_kesejahteraan_sosial')->onDelete('cascade');
         });
 

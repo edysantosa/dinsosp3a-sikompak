@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('gelandangan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id');
+            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id')->nullable();
             $table->foreign('lembaga_kesejahteraan_sosial_id')->references('id')->on('lembaga_kesejahteraan_sosial')->onDelete('cascade');
         });
 

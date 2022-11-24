@@ -5,6 +5,7 @@ namespace Database\Factories\Pmks;
 use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Pmks\LanjutUsiaTerlantar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -46,7 +47,18 @@ class PmksFactory extends Factory
             'alamat' => $this->faker->streetAddress(),
         ];
     }
+
+    public function lanjutUsiaTerlantar()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'lanjut_usia_terlantar_id' => LanjutUsiaTerlantar::factory()->create()->id
+            ];
+        });
+    }
 }
+
+
 
 /*
 TODO:
