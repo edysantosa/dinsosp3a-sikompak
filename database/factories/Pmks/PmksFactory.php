@@ -6,10 +6,12 @@ use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pmks\Gelandangan;
+use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
 use App\Models\Pmks\KorbanBencanaSosial;
 use App\Models\Pmks\LanjutUsiaTerlantar;
 use App\Models\Pmks\Pengemis;
+use App\Models\Pmks\PenyandangDisabilitas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -117,6 +119,33 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'korban_bencana_sosial_id' => KorbanBencanaSosial::factory()->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke komunitas adat terpencil
+     * @return Factory
+     */
+    public function komunitasAdatTerpencil()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'komunitas_adat_terpencil_id' => KomunitasAdatTerpencil::factory()->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke penyandang disabilitas
+     * @param  bool $isDalamPanti status apakah penyandang disabilitas ditampung penampung
+     * @return Factory
+     */
+    public function penyandangDisabilitas($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'penyandang_disabilitas_id' => PenyandangDisabilitas::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
