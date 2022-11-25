@@ -23,6 +23,7 @@ class PmksSeeder extends Seeder
         // Pmks::factory()->count(2)->gelandangan(false)->create();
         // Pmks::factory()->count(2)->pengemis(true)->create();
         // Pmks::factory()->count(2)->pengemis(false)->create();
-        Pmks::factory()->count(2)->korbanBencanaAlam()->create();
+        // Pmks::factory()->count(2)->korbanBencanaAlam()->create();
+        Pmks::factory()->count(2)->korbanBencanaSosial()->create();
     }
 }

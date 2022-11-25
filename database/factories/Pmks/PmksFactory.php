@@ -7,6 +7,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pmks\Gelandangan;
 use App\Models\Pmks\KorbanBencanaAlam;
+use App\Models\Pmks\KorbanBencanaSosial;
 use App\Models\Pmks\LanjutUsiaTerlantar;
 use App\Models\Pmks\Pengemis;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -103,6 +104,19 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'korban_bencana_alam_id' => KorbanBencanaAlam::factory()->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke korban bencana sosial
+     * @return Factory
+     */
+    public function korbanBencanaSosial()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'korban_bencana_sosial_id' => KorbanBencanaSosial::factory()->create()->id
             ];
         });
     }
