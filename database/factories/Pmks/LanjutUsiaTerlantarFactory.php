@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Pmks;
 
+use App\Models\Psks\LembagaKesejahteraanSosial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,5 +26,20 @@ class LanjutUsiaTerlantarFactory extends Factory
                 'Cucu',
             ]),
         ];
+    }
+
+    public function isDalamPanti($isDalamPanti)
+    {
+        if ($isDalamPanti) {
+            return $this->state(function (array $attributes) {
+                return [
+                    'nama_keluarga' => null,
+                    'hubungan_keluarga' => null,
+                    'lembaga_kesejahteraan_sosial_id' => LembagaKesejahteraanSosial::all()->random()->id
+                ];
+            });
+        } else {
+            return $this;
+        }
     }
 }

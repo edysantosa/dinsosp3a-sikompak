@@ -48,11 +48,17 @@ class PmksFactory extends Factory
         ];
     }
 
-    public function lanjutUsiaTerlantar()
+    /**
+     * Masukkan PMKS ke lanjut usia terlantar
+     * @param  bool $isDalamPanti status apakah Lanjut usia terlantar diasuh oleh
+     * keluarga/lembaga penampung
+     * @return Facttory
+     */
+    public function lanjutUsiaTerlantar($isDalamPanti)
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
-                'lanjut_usia_terlantar_id' => LanjutUsiaTerlantar::factory()->create()->id
+                'lanjut_usia_terlantar_id' => LanjutUsiaTerlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
