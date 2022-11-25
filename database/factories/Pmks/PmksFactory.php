@@ -5,7 +5,10 @@ namespace Database\Factories\Pmks;
 use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Pmks\Gelandangan;
+use App\Models\Pmks\KorbanBencanaAlam;
 use App\Models\Pmks\LanjutUsiaTerlantar;
+use App\Models\Pmks\Pengemis;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -52,7 +55,7 @@ class PmksFactory extends Factory
      * Masukkan PMKS ke lanjut usia terlantar
      * @param  bool $isDalamPanti status apakah Lanjut usia terlantar diasuh oleh
      * keluarga/lembaga penampung
-     * @return Facttory
+     * @return Factory
      */
     public function lanjutUsiaTerlantar($isDalamPanti)
     {
@@ -62,8 +65,48 @@ class PmksFactory extends Factory
             ];
         });
     }
-}
 
+    /**
+     * Masukkan PMKS ke gelandangan
+     * @param  bool $isDalamPanti status apakah gelandangan ditampung penampung
+     * @return Factory
+     */
+    public function gelandangan($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'gelandangan_id' => Gelandangan::factory()->isDalamPanti($isDalamPanti)->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke pengemis
+     * @param  bool $isDalamPanti status apakah pengemis ditampung penampung
+     * @return Factory
+     */
+    public function pengemis($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'pengemis_id' => Pengemis::factory()->isDalamPanti($isDalamPanti)->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke korban bencana alam
+     * @return Factory
+     */
+    public function korbanBencanaAlam()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'korban_bencana_alam_id' => KorbanBencanaAlam::factory()->create()->id
+            ];
+        });
+    }
+}
 
 
 /*

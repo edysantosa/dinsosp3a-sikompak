@@ -38,7 +38,6 @@ return new class extends Migration
             $table->foreign('kelurahan_id')->references('id')->on('kelurahan')->onDelete('restrict');
             $table->string('alamat')->nullable();
 
-
             $table->string('anak_berhadapan_hukum')->nullable()->comment('Status anak yang berhadapan dengan hukum');
             $table->boolean('is_tuna_susila')->default(0);
             $table->boolean('is_pemulung')->default(0);
@@ -50,7 +49,6 @@ return new class extends Migration
             $table->boolean('is_pmbs')->default(0)->comment('Pekerja Migran Bermasalah Sosial');
             $table->boolean('is_perempuan_rawan_sosial')->default(0);
             $table->boolean('is_keluarga_bermasalah_sosial')->default(0);
-            $table->boolean('is_dtks')->default(0)->comment('Apakah masuk atau tidak di DTKS');
 
 
             $table->string('delete_reason')->nullable()->comment('Alasan data dihapus oleh user');
