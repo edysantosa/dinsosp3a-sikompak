@@ -6,6 +6,7 @@ use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pmks\AnakBalitaTerlantar;
+use App\Models\Pmks\AnakJalanan;
 use App\Models\Pmks\Gelandangan;
 use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
@@ -151,7 +152,6 @@ class PmksFactory extends Factory
         });
     }
 
-
     /**
      * Masukkan PMKS ke anak/balita terlantar
      * @param  bool $isDalamPanti status apakah anak/balita terlantar diasuh oleh
@@ -163,6 +163,21 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
                 'anak_balita_terlantar_id' => AnakBalitaTerlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke anak jalanan
+     * @param  bool $isDalamPanti status apakah anak jalanan diasuh oleh
+     * keluarga/lembaga penampung
+     * @return Factory
+     */
+    public function anakJalanan($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'anak_jalanan_id' => AnakJalanan::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }

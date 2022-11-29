@@ -28,7 +28,9 @@ class PmksSeeder extends Seeder
         // Pmks::factory()->count(2)->komunitasAdatTerpencil()->create();
         // Pmks::factory()->count(2)->penyandangDisabilitas(true)->create();
         // Pmks::factory()->count(2)->penyandangDisabilitas(false)->create();
-        Pmks::factory()->count(2)->anakBalitaTerlantar(true)->create();
-        Pmks::factory()->count(2)->anakBalitaTerlantar(false)->create();
+        // Pmks::factory()->count(2)->anakBalitaTerlantar(true)->create();
+        // Pmks::factory()->count(2)->anakBalitaTerlantar(false)->create();
+        Pmks::factory()->count(2)->anakJalanan(true)->create();
+        Pmks::factory()->count(2)->anakJalanan(false)->create();
     }
 }
