@@ -12,6 +12,7 @@ use App\Models\Pmks\Gelandangan;
 use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
 use App\Models\Pmks\KorbanBencanaSosial;
+use App\Models\Pmks\KorbanKekerasan;
 use App\Models\Pmks\LanjutUsiaTerlantar;
 use App\Models\Pmks\Pengemis;
 use App\Models\Pmks\PenyandangDisabilitas;
@@ -194,6 +195,22 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
                 'anak_perlu_perlindungan_id' => AnakPerluPerlindungan::factory()->isDalamPanti($isDalamPanti)->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke korban kekerasan
+     * @param  bool $isDalamPanti status apakah korban kekerasan diasuh oleh
+     * keluarga/lembaga penampung
+     * parameter umur dibawah 18 dianggap sebagai anak
+     * @return Factory
+     */
+    public function korbanKekerasan($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'korban_kekerasan_id' => KorbanKekerasan::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
