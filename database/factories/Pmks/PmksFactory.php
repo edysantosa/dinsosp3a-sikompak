@@ -7,6 +7,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pmks\AnakBalitaTerlantar;
 use App\Models\Pmks\AnakJalanan;
+use App\Models\Pmks\AnakPerluPerlindungan;
 use App\Models\Pmks\Gelandangan;
 use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
@@ -178,6 +179,21 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
                 'anak_jalanan_id' => AnakJalanan::factory()->isDalamPanti($isDalamPanti)->create()->id
+            ];
+        });
+    }
+
+    /**
+     * Masukkan PMKS ke anak perlu perlindungan
+     * @param  bool $isDalamPanti status apakah anak perlu perlindungan diasuh oleh
+     * keluarga/lembaga penampung
+     * @return Factory
+     */
+    public function anakPerluPerlindungan($isDalamPanti)
+    {
+        return $this->state(function (array $attributes) use ($isDalamPanti) {
+            return [
+                'anak_perlu_perlindungan_id' => AnakPerluPerlindungan::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
