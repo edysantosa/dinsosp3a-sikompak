@@ -68,7 +68,7 @@ class PmksFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
-                'anak_balita_terlantar_id' => Terlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
+                'terlantar_id' => Terlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
