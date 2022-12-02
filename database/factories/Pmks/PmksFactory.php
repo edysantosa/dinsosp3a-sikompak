@@ -5,7 +5,6 @@ namespace Database\Factories\Pmks;
 use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
-use App\Models\Pmks\AnakBalitaTerlantar;
 use App\Models\Pmks\AnakJalanan;
 use App\Models\Pmks\AnakPerluPerlindungan;
 use App\Models\Pmks\Gelandangan;
@@ -13,9 +12,9 @@ use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
 use App\Models\Pmks\KorbanBencanaSosial;
 use App\Models\Pmks\KorbanKekerasan;
-use App\Models\Pmks\LanjutUsiaTerlantar;
 use App\Models\Pmks\Pengemis;
 use App\Models\Pmks\PenyandangDisabilitas;
+use App\Models\Pmks\Terlantar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -59,16 +58,17 @@ class PmksFactory extends Factory
     }
 
     /**
-     * Masukkan PMKS ke lanjut usia terlantar
-     * @param  bool $isDalamPanti status apakah Lanjut usia terlantar diasuh oleh
+     * Masukkan PMKS ke  terlantar
+     * @param  bool $isDalamPanti status apakah 
+     * anak / balita / lansia terlantar diasuh oleh
      * keluarga/lembaga penampung
      * @return Factory
      */
-    public function lanjutUsiaTerlantar($isDalamPanti)
+    public function terlantar($isDalamPanti)
     {
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
-                'lanjut_usia_terlantar_id' => LanjutUsiaTerlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
+                'anak_balita_terlantar_id' => Terlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }
@@ -150,21 +150,6 @@ class PmksFactory extends Factory
         return $this->state(function (array $attributes) use ($isDalamPanti) {
             return [
                 'penyandang_disabilitas_id' => PenyandangDisabilitas::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke anak/balita terlantar
-     * @param  bool $isDalamPanti status apakah anak/balita terlantar diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
-     */
-    public function anakBalitaTerlantar($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'anak_balita_terlantar_id' => AnakBalitaTerlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
             ];
         });
     }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class LanjutUsiaTerlantarFactory extends Factory
+class TerlantarFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,6 +24,13 @@ class LanjutUsiaTerlantarFactory extends Factory
                 'Keponakan',
                 'Tetangga',
                 'Cucu',
+                'Orang tua',
+                'Bibi',
+                'Paman',
+                'Kakek',
+                'Nenek',
+                'Saudara',
+                'Sepupu',
             ]),
         ];
     }
