@@ -16,23 +16,25 @@ class PmksSeeder extends Seeder
      */
     public function run()
     {
-        // Pmks::factory()->count(2)->create();
-        // Pmks::factory()->count(2)->terlantar(true)->create();
-        // Pmks::factory()->count(2)->terlantar(false)->create();
-        // Pmks::factory()->count(2)->gelandangan(true)->create();
-        // Pmks::factory()->count(2)->gelandangan(false)->create();
-        // Pmks::factory()->count(2)->pengemis(true)->create();
-        // Pmks::factory()->count(2)->pengemis(false)->create();
-        // Pmks::factory()->count(2)->korbanBencanaAlam()->create();
-        // Pmks::factory()->count(2)->korbanBencanaSosial()->create();
-        // Pmks::factory()->count(2)->komunitasAdatTerpencil()->create();
-        // Pmks::factory()->count(2)->penyandangDisabilitas(true)->create();
-        // Pmks::factory()->count(2)->penyandangDisabilitas(false)->create();
-        // Pmks::factory()->count(2)->anakJalanan(true)->create();
-        // Pmks::factory()->count(2)->anakJalanan(false)->create();
-        // Pmks::factory()->count(2)->anakPerluPerlindungan(true)->create();
-        // Pmks::factory()->count(2)->anakPerluPerlindungan(false)->create();
-        Pmks::factory()->count(2)->korbanKekerasan(true)->create();
-        Pmks::factory()->count(2)->korbanKekerasan(false)->create();
+        for ($i=0; $i < 100; $i++) { 
+            // Pmks::factory()->count(500)->create();
+            Pmks::factory()->count(500)->terlantar(true)->create();
+            Pmks::factory()->count(500)->terlantar(false)->create();
+            Pmks::factory()->count(500)->gelandangan(true)->create();
+            Pmks::factory()->count(500)->gelandangan(false)->create();
+            Pmks::factory()->count(500)->pengemis(true)->create();
+            Pmks::factory()->count(500)->pengemis(false)->create();
+            Pmks::factory()->count(500)->korbanBencanaAlam()->create();
+            Pmks::factory()->count(500)->korbanBencanaSosial()->create();
+            Pmks::factory()->count(500)->komunitasAdatTerpencil()->create();
+            Pmks::factory()->count(500)->penyandangDisabilitas(true)->create();
+            Pmks::factory()->count(500)->penyandangDisabilitas(false)->create();
+            Pmks::factory()->count(500)->anakJalanan(true)->create();
+            Pmks::factory()->count(500)->anakJalanan(false)->create();
+            Pmks::factory()->count(500)->anakPerluPerlindungan(true)->create();
+            Pmks::factory()->count(500)->anakPerluPerlindungan(false)->create();
+            Pmks::factory()->count(500)->korbanKekerasan(true)->create();
+            Pmks::factory()->count(500)->korbanKekerasan(false)->create();
+        }
     }
 }
