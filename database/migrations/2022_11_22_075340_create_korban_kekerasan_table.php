@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anak_korban_kekerasan', function (Blueprint $table) {
+        Schema::create('korban_kekerasan', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_samaran')->nullable();
             $table->string('nama_keluarga')->nullable();
             $table->string('hubungan_keluarga')->nullable();
 
-            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id');
+            $table->unsignedBigInteger('lembaga_kesejahteraan_sosial_id')->nullable();
             $table->foreign('lembaga_kesejahteraan_sosial_id')->references('id')->on('lembaga_kesejahteraan_sosial')->onDelete('cascade');
 
             $table->unsignedBigInteger('jenis_kekerasan_id');
@@ -26,8 +27,8 @@ return new class extends Migration
         });
 
         Schema::table('pmks', function (Blueprint $table) {
-            $table->unsignedBigInteger('anak_korban_kekerasan_id')->nullable();
-            $table->foreign('anak_korban_kekerasan_id')->references('id')->on('anak_korban_kekerasan')->onDelete('cascade');
+            $table->unsignedBigInteger('korban_kekerasan_id')->nullable();
+            $table->foreign('korban_kekerasan_id')->references('id')->on('korban_kekerasan')->onDelete('cascade');
         });
     }
 
@@ -39,9 +40,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pmks', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('anak_korban_kekerasan_id');
+            $table->dropConstrainedForeignId('korban_kekerasan_id');
         });
 
-        Schema::dropIfExists('anak_korban_kekerasan');
+        Schema::dropIfExists('korban_kekerasan');
     }
 };

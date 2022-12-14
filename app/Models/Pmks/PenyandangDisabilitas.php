@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PenyandangDisabilitas extends Model
 {
+    // TODO: buat accessor untuk status anak / dewasa
     use HasFactory;
 
     protected $table = 'penyandang_disabilitas';

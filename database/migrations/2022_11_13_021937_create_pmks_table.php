@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nik', 16)->nullable();
             $table->string('kartu_keluarga', 16)->nullable();
             $table->string('bpjs_kesehatan', 13)->nullable();
-            $table->string('kartu_indonesia_sehat', 13)->nullable();
+            $table->boolean('is_kartu_indonesia_sehat')->default(0)->comment('Kalau true berarti pemegang program JKN-KIS');
             $table->string('kartu_indonesia_pintar', 6)->nullable();
             $table->string('nomor_rekening')->nullable();
             $table->string('bank_nomor_rekening')->nullable()->comment('nama bank untuk nomor_rekening');
@@ -38,7 +38,6 @@ return new class extends Migration
             $table->foreign('kelurahan_id')->references('id')->on('kelurahan')->onDelete('restrict');
             $table->string('alamat')->nullable();
 
-
             $table->string('anak_berhadapan_hukum')->nullable()->comment('Status anak yang berhadapan dengan hukum');
             $table->boolean('is_tuna_susila')->default(0);
             $table->boolean('is_pemulung')->default(0);
@@ -50,7 +49,6 @@ return new class extends Migration
             $table->boolean('is_pmbs')->default(0)->comment('Pekerja Migran Bermasalah Sosial');
             $table->boolean('is_perempuan_rawan_sosial')->default(0);
             $table->boolean('is_keluarga_bermasalah_sosial')->default(0);
-            $table->boolean('is_dtks')->default(0)->comment('Apakah masuk atau tidak di DTKS');
 
 
             $table->string('delete_reason')->nullable()->comment('Alasan data dihapus oleh user');

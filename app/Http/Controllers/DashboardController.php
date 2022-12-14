@@ -13,6 +13,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard');
+        // return view('dashboard');
+        dd(\Carbon\Carbon::now()->subYears(5)->toDateString());
     }
 }

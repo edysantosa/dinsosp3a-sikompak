@@ -11,6 +11,30 @@ class Pmks extends Model
 
     protected $table = 'pmks';
 
+
+    /******************************************************************************/
+
+    /**
+     * Scope untuk query berdasarkan definisi dewasa, anak dan balita
+     * NOTE: Scope anak termasuk dalam balita, anak <= 18th, balita <= 5 tahun
+     */
+    public function scopeAnak($query)
+    {
+        return $query->where('tanggal_lahir', '<=', \Carbon\Carbon::now()->subYears(18)->toDateString());
+    }
+
+    public function scopeBalita($query)
+    {
+        return $query->where('tanggal_lahir', '<=', \Carbon\Carbon::now()->subYears(5)->toDateString());
+    }
+
+    public function scopeDewasa($query)
+    {
+        return $query->where('tanggal_lahir', '>', \Carbon\Carbon::now()->subYears(18)->toDateString());
+    }
+
+    /******************************************************************************/
+
     public function provinsi()
     {
         return $this->belongsTo('App\Models\Provinsi');
