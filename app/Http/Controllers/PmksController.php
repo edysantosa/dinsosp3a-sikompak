@@ -7,14 +7,31 @@ use Illuminate\Http\Request;
 
 class PmksController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::eloquent(
+                PMKS::query()
+            )
+            ->addIndexColumn()
+            ->setRowId('id')
+            ->make(true);
+        }
+
+        return view('pmks.index', [
+            'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
+            'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
+        ]);
     }
 
     /**
