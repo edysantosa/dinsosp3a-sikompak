@@ -14,6 +14,7 @@ use App\Models\Pmks\KorbanBencanaSosial;
 use App\Models\Pmks\KorbanKekerasan;
 use App\Models\Pmks\Pengemis;
 use App\Models\Pmks\PenyandangDisabilitas;
+use App\Models\Pmks\Pmks;
 use App\Models\Pmks\Terlantar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -58,145 +59,16 @@ class PmksFactory extends Factory
     }
 
     /**
-     * Masukkan PMKS ke  terlantar
-     * @param  bool $isDalamPanti status apakah 
-     * anak / balita / lansia terlantar diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
+     * Configure the model factory.
+     *
+     * @return $this
      */
-    public function terlantar($isDalamPanti)
+    public function configure()
     {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'terlantar_id' => Terlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke gelandangan
-     * @param  bool $isDalamPanti status apakah gelandangan ditampung penampung
-     * @return Factory
-     */
-    public function gelandangan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'gelandangan_id' => Gelandangan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke pengemis
-     * @param  bool $isDalamPanti status apakah pengemis ditampung penampung
-     * @return Factory
-     */
-    public function pengemis($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'pengemis_id' => Pengemis::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban bencana alam
-     * @return Factory
-     */
-    public function korbanBencanaAlam()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'korban_bencana_alam_id' => KorbanBencanaAlam::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban bencana sosial
-     * @return Factory
-     */
-    public function korbanBencanaSosial()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'korban_bencana_sosial_id' => KorbanBencanaSosial::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke komunitas adat terpencil
-     * @return Factory
-     */
-    public function komunitasAdatTerpencil()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'komunitas_adat_terpencil_id' => KomunitasAdatTerpencil::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke penyandang disabilitas
-     * @param  bool $isDalamPanti status apakah penyandang disabilitas ditampung penampung
-     * @return Factory
-     */
-    public function penyandangDisabilitas($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'penyandang_disabilitas_id' => PenyandangDisabilitas::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke anak jalanan
-     * @param  bool $isDalamPanti status apakah anak jalanan diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
-     */
-    public function anakJalanan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'anak_jalanan_id' => AnakJalanan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke anak perlu perlindungan
-     * @param  bool $isDalamPanti status apakah anak perlu perlindungan diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
-     */
-    public function anakPerluPerlindungan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'anak_perlu_perlindungan_id' => AnakPerluPerlindungan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban kekerasan
-     * @param  bool $isDalamPanti status apakah korban kekerasan diasuh oleh
-     * keluarga/lembaga penampung
-     * parameter umur dibawah 18 dianggap sebagai anak
-     * @return Factory
-     */
-    public function korbanKekerasan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'korban_kekerasan_id' => KorbanKekerasan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
+        return $this->afterMaking(function (Pmks $pmks) {
+            //
+        })->afterCreating(function (Pmks $pmks) {
+            //
         });
     }
 }
