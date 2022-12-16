@@ -83,10 +83,28 @@ class Pmks extends Model
 
     public function jenisPmks()
     {
+        return $this->belongsToMany('App\Models\Pmks\JenisPmks');
+    }
+
+    public function jenisPmksDetail()
+    {
         return $this->belongsToMany('App\Models\Pmks\JenisPmks')
                 // ->as('informasi_tambahan')
                 ->using(JenisPmksPmks::class)
                 ->withTimestamps()
-                ->withPivot('nama_keluarga', 'hubungan_keluarga', 'status_hukum');
+                ->withPivot([
+                    'nama_keluarga',
+                    'hubungan_keluarga',
+                    'lembaga_kesejahteraan_sosial_id',
+                    'jenis_disabilitas_id',
+                    'jenis_kekerasan_id',
+                    'tanggal_bencana',
+                    'jumlah_korban',
+                    'jenis_bencana_alam_id',
+                    'jenis_bencana_sosial_id',
+                    'jumlah_laki',
+                    'jumlah_perempuan',
+                    'status_hukum',
+                ]);
     }
 }
