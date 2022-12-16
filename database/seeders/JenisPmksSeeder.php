@@ -8,7 +8,8 @@ use Illuminate\Database\Seeder;
 class JenisPmksSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Jika menambah jenis, atau mengubah nama
+     * update juga kondisi di PmksFactory
      *
      * @return void
      */
@@ -17,34 +18,67 @@ class JenisPmksSeeder extends Seeder
         $jenisPmks = [
             [
                 'id' => '1',
-                'name' => 'Terlantar',
-            ],            [
+                'nama' => 'Terlantar',
+            ],[
                 'id' => '2',
-                'name' => 'Gelandangan',
-            ],            [
+                'nama' => 'Gelandangan',
+            ],[
                 'id' => '3',
-                'name' => 'Pengemis',
-            ],            [
+                'nama' => 'Pengemis',
+            ],[
                 'id' => '4',
-                'name' => 'Korban Bencana Alam',
-            ],            [
+                'nama' => 'Korban Bencana Alam',
+            ],[
                 'id' => '5',
-                'name' => 'Korban Bencana Sosial',
-            ],            [
+                'nama' => 'Korban Bencana Sosial',
+            ],[
                 'id' => '6',
-                'name' => 'Komunitas Adat Terpencil',
-            ],            [
+                'nama' => 'Komunitas Adat Terpencil',
+            ],[
                 'id' => '7',
-                'name' => 'Penyandang Disabilitas',
-            ],            [
+                'nama' => 'Penyandang Disabilitas',
+            ],[
                 'id' => '8',
-                'name' => 'Anak Jalanan',
-            ],            [
+                'nama' => 'Anak Jalanan',
+            ],[
                 'id' => '9',
-                'name' => 'Anak Perlu Perlindungan',
-            ],            [
+                'nama' => 'Anak Perlu Perlindungan',
+            ],[
                 'id' => '10',
-                'name' => 'Korban Kekerasan',
+                'nama' => 'Korban Kekerasan',
+            ],[
+                'id' => '11',
+                'nama' => 'Anak Berhadapan dengan Hukum',
+            ],[
+                'id' => '12',
+                'nama' => 'Tuna Susila',
+            ],[
+                'id' => '13',
+                'nama' => 'Pemulung',
+            ],[
+                'id' => '14',
+                'nama' => 'Kelompok Minoritas',
+            ],[
+                'id' => '15',
+                'nama' => 'Bekas Warga Binaan Lembaga Permasyarakatan',
+            ],[
+                'id' => '16',
+                'nama' => 'Orang Dengan HIV AIDS',
+            ],[
+                'id' => '17',
+                'nama' => 'Korban Napza',
+            ],[
+                'id' => '18',
+                'nama' => 'Korban Trafficking',
+            ],[
+                'id' => '19',
+                'nama' => 'Pekerja Migran Bermasalah Sosial',
+            ],[
+                'id' => '20',
+                'nama' => 'Perempuan Rawan Sosial',
+            ],[
+                'id' => '21',
+                'nama' => 'Keluarga Bermasalah Sosial',
             ],
         ];
         foreach ($jenisPmks as $pmks) {

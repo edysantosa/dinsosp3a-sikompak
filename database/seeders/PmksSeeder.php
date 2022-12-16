@@ -17,7 +17,6 @@ class PmksSeeder extends Seeder
      */
     public function run()
     {
-        Pmks::factory()->count(1)->create();
-        
+        Pmks::factory()->count(100)->create();
     }
 }

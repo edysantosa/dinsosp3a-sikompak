@@ -38,19 +38,6 @@ return new class extends Migration
             $table->foreign('kelurahan_id')->references('id')->on('kelurahan')->onDelete('restrict');
             $table->string('alamat')->nullable();
 
-            $table->string('anak_berhadapan_hukum')->nullable()->comment('Status anak yang berhadapan dengan hukum');
-            $table->boolean('is_tuna_susila')->default(0);
-            $table->boolean('is_pemulung')->default(0);
-            $table->boolean('is_kelompok_minoritas')->default(0);
-            $table->boolean('is_bwblp')->default(0)->comment('Bekas Warga Binaan Lembaga Permasyarakatan');
-            $table->boolean('is_odha')->default(0)->comment('Orang Dengan HIV AIDS');
-            $table->boolean('is_korban_napza')->default(0);
-            $table->boolean('is_korban_trafficking')->default(0);
-            $table->boolean('is_pmbs')->default(0)->comment('Pekerja Migran Bermasalah Sosial');
-            $table->boolean('is_perempuan_rawan_sosial')->default(0);
-            $table->boolean('is_keluarga_bermasalah_sosial')->default(0);
-
-
             $table->string('delete_reason')->nullable()->comment('Alasan data dihapus oleh user');
             $table->timestamps();
         });
