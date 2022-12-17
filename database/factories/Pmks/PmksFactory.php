@@ -72,12 +72,18 @@ class PmksFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Pmks $pmks) {
-            //Jumlah jenis masalah sosial yang dimiliki oleh PMKS 
-            //sebagai simulasi PMKS bisa memiliki lebih dari satu masalah sosial (max 3)
+
+            if ($pmks->isAnak()) {
+                $pmks->kartu_indonesia_pintar = $this->faker->regexify('[A-Z0-9]{6}');
+                $pmks->save();
+            }
+
+            // Jumlah jenis masalah sosial yang dimiliki oleh PMKS
+            // sebagai simulasi PMKS bisa memiliki lebih dari satu masalah sosial (max 3)
             $jumlahPMKS = $this->faker->biasedNumberBetween(1, 3, 'Faker\Provider\Biased::linearLow');
 
             $arrAdditionalData = [];
-            for ($i=0; $i < $jumlahPMKS; $i++) { 
+            for ($i=0; $i < $jumlahPMKS; $i++) {
                 $jenisPmks = JenisPmks::all()->random();
                 $existingJenis = \App\Models\Pmks\JenisPmksPmks::where('pmks_id', 100)->get()->pluck('jenis_pmks_id')->toArray();
                 if (in_array($jenisPmks->id, $existingJenis)) {
