@@ -23,6 +23,11 @@
 @section('content')
 <div class="container-fluid">
     <div class="card">
+        <div class="card-header">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-app bg-primary">
+                    <i class="fas fa-user-plus"></i> Tambah User
+                </a>
+        </div>
         <div class="card-body table-responsive">
 
             <table class="table table-bordered table-striped dt-responsive yajra-datatable w-100">
@@ -38,11 +43,6 @@
                 </tbody>
             </table>
 
-        </div>
-        <div class="card-footer">
-                <a href="{{ route('admin.users.create') }}" class="btn btn-app bg-info">
-                    <i class="fas fa-user-plus"></i> Tambah User
-                </a>
         </div>
     </div>
 </div>

@@ -8,13 +8,20 @@ use App\Models\Kelurahan;
 use App\Models\Pmks\AnakJalanan;
 use App\Models\Pmks\AnakPerluPerlindungan;
 use App\Models\Pmks\Gelandangan;
+use App\Models\Pmks\JenisBencanaAlam;
+use App\Models\Pmks\JenisBencanaSosial;
+use App\Models\Pmks\JenisDisabilitas;
+use App\Models\Pmks\JenisKekerasan;
+use App\Models\Pmks\JenisPmks;
 use App\Models\Pmks\KomunitasAdatTerpencil;
 use App\Models\Pmks\KorbanBencanaAlam;
 use App\Models\Pmks\KorbanBencanaSosial;
 use App\Models\Pmks\KorbanKekerasan;
 use App\Models\Pmks\Pengemis;
 use App\Models\Pmks\PenyandangDisabilitas;
+use App\Models\Pmks\Pmks;
 use App\Models\Pmks\Terlantar;
+use App\Models\Psks\LembagaKesejahteraanSosial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -58,146 +65,126 @@ class PmksFactory extends Factory
     }
 
     /**
-     * Masukkan PMKS ke  terlantar
-     * @param  bool $isDalamPanti status apakah 
-     * anak / balita / lansia terlantar diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
+     * Configure the model factory.
+     *
+     * @return $this
      */
-    public function terlantar($isDalamPanti)
+    public function configure()
     {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'terlantar_id' => Terlantar::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
+        return $this->afterCreating(function (Pmks $pmks) {
+
+            if ($pmks->isAnak()) {
+                $pmks->kartu_indonesia_pintar = $this->faker->regexify('[A-Z0-9]{6}');
+                $pmks->save();
+            }
+
+            // Jumlah jenis masalah sosial yang dimiliki oleh PMKS
+            // sebagai simulasi PMKS bisa memiliki lebih dari satu masalah sosial (max 3)
+            $jumlahPMKS = $this->faker->biasedNumberBetween(1, 3, 'Faker\Provider\Biased::linearLow');
+
+            $arrAdditionalData = [];
+            for ($i=0; $i < $jumlahPMKS; $i++) {
+                $jenisPmks = JenisPmks::all()->random();
+                $existingJenis = \App\Models\Pmks\JenisPmksPmks::where('pmks_id', 100)->get()->pluck('jenis_pmks_id')->toArray();
+                if (in_array($jenisPmks->id, $existingJenis)) {
+                    break;
+                }
+
+
+                $additionalData = [];
+                $isDalamPanti = $this->faker->randomElement([0, 1]);
+
+                switch ($jenisPmks->id) {
+                    case JenisPmks::KORBAN_KEKERASAN:
+                    case JenisPmks::ANAK_PERLU_PERLINDUNGAN:
+                    case JenisPmks::ANAK_JALANAN:
+                    case JenisPmks::PENYANDANG_DISABILITAS:
+                    case JenisPmks::TERLANTAR:
+                        if ($isDalamPanti) {
+                            $additionalData = [
+                                'lembaga_kesejahteraan_sosial_id' => LembagaKesejahteraanSosial::all()->random()->id
+                            ];
+                        } else {
+                            $additionalData = [
+                                'nama_keluarga' => $this->faker->name($this->faker->randomElement(['male', 'female'])),
+                                'hubungan_keluarga' => $this->keluarga($pmks),
+                            ];
+                        }
+                        switch ($jenisPmks->id) {
+                            case JenisPmks::PENYANDANG_DISABILITAS:
+                                $additionalData['jenis_disabilitas_id'] = JenisDisabilitas::all()->random()->id;
+                                break;
+                            case JenisPmks::KORBAN_KEKERASAN:
+                                $additionalData['jenis_kekerasan_id'] = JenisKekerasan::all()->random()->id;
+                                break;
+                        }
+                        break;
+
+
+                    case JenisPmks::GELANDANGAN:
+                    case JenisPmks::PENGEMIS:
+                        if ($isDalamPanti) {
+                            $additionalData = [
+                                'lembaga_kesejahteraan_sosial_id' => LembagaKesejahteraanSosial::all()->random()->id
+                            ];
+                        }
+                        break;
+
+
+                    case JenisPmks::KORBAN_BENCANA_ALAM:
+                    case JenisPmks::KORBAN_BENCANA_SOSIAL:
+                        $additionalData = [
+                            'tanggal_bencana' => $this->faker->dateTimeBetween($startDate = '-24 months', $endDate = 'now')->format("Y-m-d"),
+                            'jumlah_korban' => $this->faker->randomNumber(4, false),
+                        ];
+                        switch ($jenisPmks->nama) {
+                            case JenisPmks::KORBAN_BENCANA_ALAM:
+                                $additionalData['jenis_bencana_alam_id'] = JenisBencanaAlam::all()->random()->id;
+                                break;
+                            case JenisPmks::KORBAN_BENCANA_SOSIAL:
+                                $additionalData['jenis_bencana_sosial_id'] = JenisBencanaSosial::all()->random()->id;
+                                break;
+                        }
+                        break;
+
+
+                    case JenisPmks::KOMUNITAS_ADAT_TERPENCIL:
+                        $additionalData = [
+                            'jumlah_laki' => $this->faker->randomNumber(4, false),
+                            'jumlah_perempuan' => $this->faker->randomNumber(4, false),
+                        ];
+                        break;
+
+                    case JenisPmks::ANAK_BERHADAPAN_HUKUM:
+                        $additionalData = [
+                            'status_hukum' => $this->faker->randomElement(['Tersangka', 'Pelaku', 'Tahanan', 'Narapidana']),
+                        ];
+                        break;
+                }
+                $arrAdditionalData[$jenisPmks->id] = $additionalData;
+            }
+            $pmks->jenisPmks()->sync($arrAdditionalData);
         });
     }
 
-    /**
-     * Masukkan PMKS ke gelandangan
-     * @param  bool $isDalamPanti status apakah gelandangan ditampung penampung
-     * @return Factory
-     */
-    public function gelandangan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'gelandangan_id' => Gelandangan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke pengemis
-     * @param  bool $isDalamPanti status apakah pengemis ditampung penampung
-     * @return Factory
-     */
-    public function pengemis($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'pengemis_id' => Pengemis::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban bencana alam
-     * @return Factory
-     */
-    public function korbanBencanaAlam()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'korban_bencana_alam_id' => KorbanBencanaAlam::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban bencana sosial
-     * @return Factory
-     */
-    public function korbanBencanaSosial()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'korban_bencana_sosial_id' => KorbanBencanaSosial::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke komunitas adat terpencil
-     * @return Factory
-     */
-    public function komunitasAdatTerpencil()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'komunitas_adat_terpencil_id' => KomunitasAdatTerpencil::factory()->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke penyandang disabilitas
-     * @param  bool $isDalamPanti status apakah penyandang disabilitas ditampung penampung
-     * @return Factory
-     */
-    public function penyandangDisabilitas($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'penyandang_disabilitas_id' => PenyandangDisabilitas::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke anak jalanan
-     * @param  bool $isDalamPanti status apakah anak jalanan diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
-     */
-    public function anakJalanan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'anak_jalanan_id' => AnakJalanan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke anak perlu perlindungan
-     * @param  bool $isDalamPanti status apakah anak perlu perlindungan diasuh oleh
-     * keluarga/lembaga penampung
-     * @return Factory
-     */
-    public function anakPerluPerlindungan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'anak_perlu_perlindungan_id' => AnakPerluPerlindungan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
-    }
-
-    /**
-     * Masukkan PMKS ke korban kekerasan
-     * @param  bool $isDalamPanti status apakah korban kekerasan diasuh oleh
-     * keluarga/lembaga penampung
-     * parameter umur dibawah 18 dianggap sebagai anak
-     * @return Factory
-     */
-    public function korbanKekerasan($isDalamPanti)
-    {
-        return $this->state(function (array $attributes) use ($isDalamPanti) {
-            return [
-                'korban_kekerasan_id' => KorbanKekerasan::factory()->isDalamPanti($isDalamPanti)->create()->id
-            ];
-        });
+    private function keluarga(Pmks $pmks) : string {
+        if ($pmks->isLansia()) {
+            return $this->faker->randomElement([
+                        'Anak',
+                        'Keponakan',
+                        'Tetangga',
+                        'Cucu',
+                        'Saudara',
+                    ]);
+        } else {
+            return $this->faker->randomElement([
+                        'Orang tua',
+                        'Saudara',
+                        'Orang tua asuh',
+                        'Paman',
+                        'Bibi',
+                    ]);
+        }
     }
 }
 
