@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pmks\JenisPmks;
 use App\Models\Pmks\Pmks;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PmksController extends Controller
 {
@@ -21,7 +23,10 @@ class PmksController extends Controller
     {
         if ($request->ajax()) {
             return DataTables::eloquent(
-                PMKS::query()
+                PMKS::with([
+                    'KabupatenKota',
+                    'jenisPmks',
+                ])->select('pmks.*')
             )
             ->addIndexColumn()
             ->setRowId('id')
@@ -30,7 +35,7 @@ class PmksController extends Controller
 
         return view('pmks.index', [
             'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
-            'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
+            'jenis_pmks' => \App\Models\Pmks\JenisPmks::all(),
         ]);
     }
 

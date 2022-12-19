@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <!-- Default box -->
+            <!-- Search card -->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Pencarian</h3>
@@ -69,7 +69,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Kabupaten</label>
-                                    <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                    <select class="form-control select2" multiple="multiple" data-placeholder="Pilih Kabupaten/Kota" style="width: 100%;">
                                         @foreach($kabupaten as $kab)
                                             <option value="{{ $kab->id }}">
                                                 {{ $kab->nama }}
@@ -92,7 +92,13 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Jenis PMKS</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Jenis PMKS">
+                                    <select class="form-control select2" multiple="multiple" data-placeholder="Pilih Jenis PMKS" style="width: 100%;">
+                                        @foreach($jenis_pmks as $jpmks)
+                                            <option value="{{ $jpmks->id }}">
+                                                {{ $jpmks->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -100,12 +106,47 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-right">
-                    <button type="button" class="btn btn-sm btn-default"><i class="fa fa-undo"></i> Batalkan</button>
+                    <button type="button" class="btn btn-sm btn-default" id="search-undo"><i class="fa fa-undo"></i> Batalkan</button>
                     <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Cari</button>
                 </div>
                 <!-- /.card-footer-->
             </div>
             <!-- /.card -->
+
+
+
+
+
+            <div class="card">
+                <div class="card-header">
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-app bg-primary">
+                            <i class="fas fa-user-plus"></i> Tambah PMKS
+                        </a>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped dt-responsive yajra-datatable w-100">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Kabupaten Asal</th>
+                                <th>Alamat</th>
+                                <th>Jenis Pmks</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+
         </div>
     </div>
 </div>

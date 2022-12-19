@@ -85,7 +85,7 @@ class PmksFactory extends Factory
             $arrAdditionalData = [];
             for ($i=0; $i < $jumlahPMKS; $i++) {
                 $jenisPmks = JenisPmks::all()->random();
-                $existingJenis = \App\Models\Pmks\JenisPmksPmks::where('pmks_id', 100)->get()->pluck('jenis_pmks_id')->toArray();
+                $existingJenis = \App\Models\Pmks\JenisPmksPmks::where('pmks_id', $pmks->id)->get()->pluck('jenis_pmks_id')->toArray();
                 if (in_array($jenisPmks->id, $existingJenis)) {
                     break;
                 }
