@@ -2,8 +2,10 @@
 
 namespace App\Models\Pmks;
 
+use App\Models\Pmks\JenisPmksPmks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Pmks extends Model
 {
@@ -13,24 +15,48 @@ class Pmks extends Model
 
 
     /******************************************************************************/
-
     /**
      * Scope untuk query berdasarkan definisi dewasa, anak dan balita
      * NOTE: Scope anak termasuk dalam balita, anak <= 18th, balita <= 5 tahun
      */
     public function scopeAnak($query)
     {
-        return $query->where('tanggal_lahir', '<=', \Carbon\Carbon::now()->subYears(18)->toDateString());
+        return $query->where('tanggal_lahir', '<=', Carbon::now()->subYears(18)->toDateString());
+    }
+
+    public function isAnak() : bool
+    {
+        return Carbon::parse($this->attributes['tanggal_lahir'])->age <= 18;
     }
 
     public function scopeBalita($query)
     {
-        return $query->where('tanggal_lahir', '<=', \Carbon\Carbon::now()->subYears(5)->toDateString());
+        return $query->where('tanggal_lahir', '<=', Carbon::now()->subYears(5)->toDateString());
+    }
+
+    public function isBalita() : bool
+    {
+        return Carbon::parse($this->attributes['tanggal_lahir'])->age <= 5;
     }
 
     public function scopeDewasa($query)
     {
-        return $query->where('tanggal_lahir', '>', \Carbon\Carbon::now()->subYears(18)->toDateString());
+        return $query->where('tanggal_lahir', '>', Carbon::now()->subYears(18)->toDateString());
+    }
+
+    public function isDewasa() : bool
+    {
+        return Carbon::parse($this->attributes['tanggal_lahir'])->age > 18;
+    }
+
+    public function scopeLansia($query)
+    {
+        return $query->where('tanggal_lahir', '>', Carbon::now()->subYears(60)->toDateString());
+    }
+
+    public function isLansia() : bool
+    {
+        return Carbon::parse($this->attributes['tanggal_lahir'])->age > 60;
     }
 
     /******************************************************************************/
@@ -55,75 +81,30 @@ class Pmks extends Model
         return $this->belongsTo('App\Models\Kelurahan');
     }
 
-    // Lanjut usia terlantar
-    public function lanjutUsiaTerlantar()
+    public function jenisPmks()
     {
-        return $this->belongsTo('App\Models\Pmks\LanjutUsiaTerlantar');
+        return $this->belongsToMany('App\Models\Pmks\JenisPmks');
     }
 
-    // Gelandangan
-    public function gelandangan()
+    public function jenisPmksDetail()
     {
-        return $this->belongsTo('App\Models\Pmks\LanjutUsiaTerlantar');
-    }
-
-    // Pengemis
-    public function pengemis()
-    {
-        return $this->belongsTo('App\Models\Pmks\Pengemis');
-    }
-
-    // Korban bencana alam
-    public function korbanBencanaAlam()
-    {
-        return $this->belongsTo('App\Models\Pmks\KorbanBencanaAlam');
-    }
-
-    // Korban bencana sosial
-    public function korbanBencanaSosial()
-    {
-        return $this->belongsTo('App\Models\Pmks\KorbanBencanaSosial');
-    }
-
-    // Komunitas adat terpencil
-    public function komunitasAdatTerpencil()
-    {
-        return $this->belongsTo('App\Models\Pmks\KomunitasAdatTerpencil');
-    }
-
-    // Anak / balita terlantar
-    public function anakBalitaTerlantar()
-    {
-        return $this->belongsTo('App\Models\Pmks\AnakBalitaTerlantar');
-    }
-
-    // Anak jalanan
-    public function anakJalanan()
-    {
-        return $this->belongsTo('App\Models\Pmks\AnakJalanan');
-    }
-
-    // Anak perlu perlindungan
-    public function anakPerluPerlindungan()
-    {
-        return $this->belongsTo('App\Models\Pmks\AnakPerluPerlindungan');
-    }
-
-    // Anak korban kekerasan
-    public function anakKorbanKekerasan()
-    {
-        return $this->belongsTo('App\Models\Pmks\AnakKorbanKekerasan');
-    }
-
-    // Korban kekerasan
-    public function korbanKekerasan()
-    {
-        return $this->belongsTo('App\Models\Pmks\KorbanKekerasan');
-    }
-
-    // Anak disabilitas
-    public function anakDisabilitas()
-    {
-        return $this->belongsTo('App\Models\Pmks\AnakDisabilitas');
+        return $this->belongsToMany('App\Models\Pmks\JenisPmks')
+                // ->as('informasi_tambahan')
+                ->using(JenisPmksPmks::class)
+                ->withTimestamps()
+                ->withPivot([
+                    'nama_keluarga',
+                    'hubungan_keluarga',
+                    'lembaga_kesejahteraan_sosial_id',
+                    'jenis_disabilitas_id',
+                    'jenis_kekerasan_id',
+                    'tanggal_bencana',
+                    'jumlah_korban',
+                    'jenis_bencana_alam_id',
+                    'jenis_bencana_sosial_id',
+                    'jumlah_laki',
+                    'jumlah_perempuan',
+                    'status_hukum',
+                ]);
     }
 }
