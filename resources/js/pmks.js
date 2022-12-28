@@ -10,11 +10,28 @@ $(document).ready(function() {
     datatable = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        searchDelay: 1000,
+        // searchDelay: 1000,
         ajax: {
-        url: 'pmks',
-        error: function (xhr, ajaxOptions, thrownError) {
-            if (xhr.status == 401 || xhr.status == 403) {
+            url: 'pmks',
+            data: function (d) {
+                $('form#form-search').find('.form-control, .form-check-input').each(function(index, element){
+                    let elm = $(element),
+                        type = elm.attr('type'),
+                        name = elm.attr('name') || "",
+                        value = elm.val() || "",
+                        checked = elm.prop("checked");
+
+                    if ((name.length > 0 && value.length > 0) && value != 0 && type != "checkbox" || (type == "checkbox" && checked)) {
+                        if (name == 'date') {
+                            d['date'] = elm.data('daterangepicker').startDate.format('YYYY-MM-DD');
+                        } else {
+                            d[name] = value;
+                        }
+                    }
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status == 401 || xhr.status == 403) {
                     location.reload();
                 } else {
                     toastr.error(thrownError);
@@ -40,8 +57,19 @@ $(document).ready(function() {
             }},
         ],
         language: datatableId,
+        processing: true,
+        search: {return: true},
+        serverSide: true,
+        preDrawCallback: function( settings ) {
+            $("#form-search :input").prop("disabled", true);
+        },
+        drawCallback: function( settings ) {
+            $("#form-search :input").prop("disabled", false);
+        }
     });
-}).on('click', '#search-undo', function(e){
+}).on('click', '#btn-search', function(e){
+    datatable.draw();
+}).on('click', '#btn-search-undo', function(e){
     $(':input').not(':button, :submit, :reset, :hidden, .select2')
     .removeAttr('checked')
     .removeAttr('selected')

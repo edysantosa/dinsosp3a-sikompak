@@ -22,12 +22,17 @@ class PmksController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return DataTables::eloquent(
-                PMKS::with([
-                    'KabupatenKota',
-                    'jenisPmks',
-                ])->select('pmks.*')
-            )
+
+            $model = PMKS::with([
+                'KabupatenKota',
+                'jenisPmks',
+            ])->select('pmks.*');
+
+            if ($request->input('nama')) {
+                $model->where('nama', 'like', "%{$request->input('nama')}%");
+            }
+
+            return DataTables::eloquent($model)
             ->addIndexColumn()
             ->setRowId('id')
             ->make(true);
