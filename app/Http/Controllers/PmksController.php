@@ -24,12 +24,23 @@ class PmksController extends Controller
         if ($request->ajax()) {
 
             $model = PMKS::with([
-                'KabupatenKota',
+                'kabupatenKota',
                 'jenisPmks',
             ])->select('pmks.*');
 
             if ($request->input('nama')) {
                 $model->where('nama', 'like', "%{$request->input('nama')}%");
+            }
+            if ($request->input('nik')) {
+                $model->where('nik', 'like', "%{$request->input('nik')}%");
+            }
+            if ($request->input('kabupaten')) {
+                $model->whereIn('kabupaten_kota_id', $request->input('kabupaten'));
+            }
+            if ($request->input('jenis-pmks')) {
+                $model->whereHas('jenisPmks', function($q) use ($request) {
+                   $q->whereIn('jenis_pmks_id', $request->input('jenis-pmks')); 
+               });
             }
 
             return DataTables::eloquent($model)
