@@ -67,6 +67,9 @@ $(document).ready(function() {
             $("#form-search :input").prop("disabled", false);
         }
     });
+}).on('click', '#btn-search-undo', function(e){
+    $('#form-search :input').val('');
+    datatable.draw();
 }).on('click', '#btn-search', function(e){
     datatable.draw();
 }).on('click', '#btn-search-undo', function(e){
