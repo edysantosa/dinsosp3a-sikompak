@@ -21,17 +21,18 @@
 @endsection
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <!-- Search card -->
             <form id="form-search" class="form-horizontal" action="{{ route('pmks.index') }}" method="post">
-                <div class="card">
+                <div class="card collapsed-card" id="search-card">
                     <div class="card-header">
                         <h3 class="card-title">Pencarian</h3>
 
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse" >
                                 <i class="fas fa-minus"></i>
                             </button>
                             {{-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
@@ -44,18 +45,18 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nama</label>
-                                    <input type="text" class="form-control" id="nama-search" name="nama" placeholder="Nama PMKS">
+                                    <input type="text" class="form-control" id="search-nama" name="search-nama" placeholder="Nama PMKS">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">NIK</label>
-                                    <input type="text" class="form-control" id="nik-search" name="nik" placeholder="Nomor Induk Kependudukan">
+                                    <input type="text" class="form-control" id="search-nik" name="search-nik" placeholder="Nomor Induk Kependudukan">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Kabupaten</label>
-                                    <select class="form-control select2" name="kabupaten[]" multiple="multiple" data-placeholder="Pilih Kabupaten/Kota" style="width: 100%;">
+                                    <select class="form-control select2" name="search-kabupaten[]" multiple="multiple" data-placeholder="Pilih Kabupaten/Kota" style="width: 100%;">
                                         @foreach($kabupaten as $kab)
                                             <option value="{{ $kab->id }}">
                                                 {{ $kab->nama }}
@@ -67,7 +68,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Jenis PMKS</label>
-                                    <select class="form-control select2" name="jenis-pmks[]" multiple="multiple" data-placeholder="Pilih Jenis PMKS" style="width: 100%;">
+                                    <select class="form-control select2" name="search-jenis-pmks[]" multiple="multiple" data-placeholder="Pilih Jenis PMKS" style="width: 100%;">
                                         @foreach($jenis_pmks as $jpmks)
                                             <option value="{{ $jpmks->id }}">
                                                 {{ $jpmks->nama }}

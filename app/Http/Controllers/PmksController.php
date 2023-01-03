@@ -28,18 +28,18 @@ class PmksController extends Controller
                 'jenisPmks',
             ])->select('pmks.*');
 
-            if ($request->input('nama')) {
-                $model->where('nama', 'like', "%{$request->input('nama')}%");
+            if ($request->input('search-nama')) {
+                $model->where('nama', 'like', "%{$request->input('search-nama')}%");
             }
-            if ($request->input('nik')) {
-                $model->where('nik', 'like', "%{$request->input('nik')}%");
+            if ($request->input('search-nik')) {
+                $model->where('nik', 'like', "%{$request->input('search-nik')}%");
             }
-            if ($request->input('kabupaten')) {
-                $model->whereIn('kabupaten_kota_id', $request->input('kabupaten'));
+            if ($request->input('search-kabupaten')) {
+                $model->whereIn('kabupaten_kota_id', $request->input('search-kabupaten'));
             }
-            if ($request->input('jenis-pmks')) {
+            if ($request->input('search-jenis-pmks')) {
                 $model->whereHas('jenisPmks', function($q) use ($request) {
-                   $q->whereIn('jenis_pmks_id', $request->input('jenis-pmks')); 
+                   $q->whereIn('jenis_pmks_id', $request->input('search-jenis-pmks')); 
                });
             }
 

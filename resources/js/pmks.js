@@ -4,6 +4,7 @@ import toastr from '../adminlte/plugins/toastr/toastr.min.js';
 import bootbox from 'bootbox';
 import datatableId from 'datatables.net-plugins/i18n/id.json';
 import select2 from '../adminlte/plugins/select2/js/select2.full.min.js';
+import * as helper from './helper';
 var datatable;
 
 $(document).ready(function() {
@@ -67,6 +68,13 @@ $(document).ready(function() {
             $("#form-search :input").prop("disabled", false);
         }
     });
+
+    // Uncollapese filter kalau ada valuenya
+    if (!helper.isFormEmpty('#form-search')) {
+        $('#search-card').CardWidget('expand');
+    } else {
+        $('#search-card').CardWidget('collapse');
+    }
 }).on('click', '#btn-search-undo', function(e){
     $('#form-search :input').val('');
     datatable.draw();
@@ -80,6 +88,33 @@ $(document).ready(function() {
     .val('');
     $('.select2').val(null).trigger('change');
 }).on('click', '.trigger', function(e){
+
+
+    let current_row = $(this).parents('tr');
+    if (current_row.hasClass('child')) {
+        current_row = current_row.prev();
+    }
+    let id = current_row.attr('id');
+
+    // switch($(this).data('trigger')) {
+    //   case 'delete':
+    //     deleteAgent([id]);
+    //     break;
+    //   case 'edit':
+    //     location.href = Sitebase.url + '/agent/edit/' + id;
+    //     break;
+    //   case 'set-deposit':
+    //     setDeposit([id]);
+    //     break;
+    //   case 'edit-deposit':
+    //     editDeposit([id]);
+    //     break;
+    //   case 'deposit-history':
+    //     // depositHistory(id);
+    //     location.href = Sitebase.url + '/agent/agent-transactions/' + id;
+    //     break;
+    // }
+
 
 });
 
