@@ -6,8 +6,15 @@ import datatableId from 'datatables.net-plugins/i18n/id.json';
 import select2 from '../adminlte/plugins/select2/js/select2.full.min.js';
 import * as helper from './helper';
 var datatable;
+import URI from 'urijs';
 
 $(document).ready(function() {
+    // Masukkan data form filter ke url
+    let uriHelper = helper.fillFormFromUri();
+    var uris = uriHelper.uris;
+    var currentUri = uriHelper.currentUri;
+
+    // Inisialiasi datatable
     datatable = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
@@ -28,8 +35,12 @@ $(document).ready(function() {
                         } else {
                             d[name] = value;
                         }
+                        uris[name] = d[name];
                     }
                 });
+
+                // Masukkan parameter ke uri
+                currentUri.setQuery(uris);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 if (xhr.status == 401 || xhr.status == 403) {
@@ -66,9 +77,13 @@ $(document).ready(function() {
         },
         drawCallback: function( settings ) {
             $("#form-search :input").prop("disabled", false);
+
+            // Masukkan parameter pencarian ke alamat browser
+            window.history.pushState({}, 'Sikompak', currentUri.toString());
         }
     });
 
+    
     // Uncollapese filter kalau ada valuenya
     if (!helper.isFormEmpty('#form-search')) {
         $('#search-card').CardWidget('expand');
@@ -76,17 +91,15 @@ $(document).ready(function() {
         $('#search-card').CardWidget('collapse');
     }
 }).on('click', '#btn-search-undo', function(e){
-    $('#form-search :input').val('');
-    datatable.draw();
-}).on('click', '#btn-search', function(e){
-    datatable.draw();
-}).on('click', '#btn-search-undo', function(e){
     $(':input').not(':button, :submit, :reset, :hidden, .select2')
     .removeAttr('checked')
     .removeAttr('selected')
     .not(':checkbox, :radio, select, .select2')
     .val('');
     $('.select2').val(null).trigger('change');
+    datatable.draw();
+}).on('click', '#btn-search', function(e){
+    datatable.draw();
 }).on('click', '.trigger', function(e){
 
 

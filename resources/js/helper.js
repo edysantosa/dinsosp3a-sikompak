@@ -1,6 +1,6 @@
+import URI from 'urijs';
 
 // export default Helper;
-
 export function getSelectedDataTable(datatable, column){
 
     var data = datatable.rows({selected:  true}).data();
@@ -12,6 +12,7 @@ export function getSelectedDataTable(datatable, column){
     return result;
 }
 
+// Cek apakah form kosong atau tidak
 export function isFormEmpty(form){
     let empty = true;
     $(form).find(":text, :file, :checkbox, select, textarea").each(function() {
@@ -25,6 +26,9 @@ export function isFormEmpty(form){
         } else if ($element.is(':checkbox')) {
             if ($element.prop('checked') == true)
                 empty = false;            
+        } else if ($element.is('select')) {
+            if ($element.val().length != 0)
+                empty = false;          
         }
     });
 
@@ -37,4 +41,30 @@ export function formatNumberIndonesia(n) {
         return 0;
     }
     return parseFloat(n).toLocaleString('id-ID');
+}
+
+// Masukkan data form filter ke url
+export function fillFormFromUri() {
+    let currentUri = new URI();
+    let uris = URI.parseQuery(currentUri.query());
+    for(let name in uris){
+        if ($('select[name="'+name+'"]').prop('type') == 'select-multiple') {
+            if(Array.isArray(uris[name])){
+                for(let i in uris[name]){
+                    $('select[name="'+name+'"] option[value="'+uris[name][i]+'"]').prop('selected', true);
+                }
+            }else{
+                $('select[name="'+name+'"] option[value="'+uris[name]+'"]').prop('selected', true);
+            }
+            $('select[name="'+name+'"]').trigger('change');
+        } else if ($('select[name="'+name+'"]').prop('type') == 'select-one') {
+            $('select[name="'+name+'"] option[value="'+uris[name]+'"]').prop('selected', true).trigger('change');
+        } else if($('input[name="'+name+'"]').length){
+            $('input[name="'+name+'"]').val(uris[name]);
+        }
+    }
+    return {
+        'uris': uris,
+        'currentUri': currentUri
+    };
 }
