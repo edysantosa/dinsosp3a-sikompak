@@ -102,30 +102,46 @@ $(document).ready(function() {
 }).on('click', '#btn-search', function(e){
     datatable.draw();
 }).on('click', '.trigger', function(e){
-    let current_row = $(this).parents('tr');
-    if (current_row.hasClass('child')) {
-        current_row = current_row.prev();
-    }
-    let id = current_row.attr('id');
-
+    let id = $(this).parents('tr').attr('id');
+    let $button = $(this);
+    
     switch($(this).data('trigger')) {
       case 'delete':
-        deleteAgent([id]);
+        bootbox.confirm({
+            message: 'Yakin hapus data PMKS ini?',
+            locale: 'id',
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url : `pmks/${id}`,
+                        type : 'delete',
+                        dataType : 'json',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        beforeSend: function() {
+                            $button.parent().find('button').prop('disabled', true);
+                            $button.html('<i class="fas fa-spin fa-circle-notch"></i>');
+                        },
+                        complete: function() {
+                        },
+                    }).fail(function(xhr, status, statusText){
+                        var message = "Unknown error has occured";
+                        if( xhr.responseJSON ){
+                            message = xhr.responseJSON.message;
+                        }
+                        bootbox.alert(message);
+                    }).done(function(response){
+                        datatable.draw();
+                    });
+                }
+            }
+        });  
         break;
       case 'edit':
-        location.href = Sitebase.url + '/agent/edit/' + id;
+        location.href = `pmks/${id}/edit`;
         break;
-      case 'set-deposit':
-        setDeposit([id]);
-        break;
-      case 'edit-deposit':
-        editDeposit([id]);
-        break;
-      case 'deposit-history':
-        // depositHistory(id);
-        location.href = Sitebase.url + '/agent/agent-transactions/' + id;
-        break;
-    }
+    }  
 });
 
 //Initialize Select2 Elements
