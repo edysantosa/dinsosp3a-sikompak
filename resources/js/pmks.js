@@ -8,12 +8,12 @@ import * as helper from './helper';
 var datatable;
 import URI from 'urijs';
 
-$(document).ready(function() {
-    // Masukkan data form filter ke url
-    let uriHelper = helper.fillFormFromUri();
-    var uris = uriHelper.uris;
-    var currentUri = uriHelper.currentUri;
+// Masukkan data form filter ke url
+let uriHelper = helper.fillFormFromUri();
+var uris = uriHelper.uris;
+var currentUri = uriHelper.currentUri;
 
+$(document).ready(function() {
     // Inisialiasi datatable
     datatable = $('.yajra-datatable').DataTable({
         processing: true,
@@ -22,6 +22,8 @@ $(document).ready(function() {
         ajax: {
             url: 'pmks',
             data: function (d) {
+                currentUri.search("");
+                let uris = [];
                 $('form#form-search').find('.form-control, .form-check-input').each(function(index, element){
                     let elm = $(element),
                         type = elm.attr('type'),
@@ -50,7 +52,7 @@ $(document).ready(function() {
                 }
             }
         },
-        order: [[1, 'desc']],
+        order: [[1, 'asc']],
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', sortable: false, searchable: false},
             {data: 'nama', name: 'nama'},
@@ -82,7 +84,6 @@ $(document).ready(function() {
             window.history.pushState({}, 'Sikompak', currentUri.toString());
         }
     });
-
     
     // Uncollapese filter kalau ada valuenya
     if (!helper.isFormEmpty('#form-search')) {
@@ -101,34 +102,30 @@ $(document).ready(function() {
 }).on('click', '#btn-search', function(e){
     datatable.draw();
 }).on('click', '.trigger', function(e){
-
-
     let current_row = $(this).parents('tr');
     if (current_row.hasClass('child')) {
         current_row = current_row.prev();
     }
     let id = current_row.attr('id');
 
-    // switch($(this).data('trigger')) {
-    //   case 'delete':
-    //     deleteAgent([id]);
-    //     break;
-    //   case 'edit':
-    //     location.href = Sitebase.url + '/agent/edit/' + id;
-    //     break;
-    //   case 'set-deposit':
-    //     setDeposit([id]);
-    //     break;
-    //   case 'edit-deposit':
-    //     editDeposit([id]);
-    //     break;
-    //   case 'deposit-history':
-    //     // depositHistory(id);
-    //     location.href = Sitebase.url + '/agent/agent-transactions/' + id;
-    //     break;
-    // }
-
-
+    switch($(this).data('trigger')) {
+      case 'delete':
+        deleteAgent([id]);
+        break;
+      case 'edit':
+        location.href = Sitebase.url + '/agent/edit/' + id;
+        break;
+      case 'set-deposit':
+        setDeposit([id]);
+        break;
+      case 'edit-deposit':
+        editDeposit([id]);
+        break;
+      case 'deposit-history':
+        // depositHistory(id);
+        location.href = Sitebase.url + '/agent/agent-transactions/' + id;
+        break;
+    }
 });
 
 //Initialize Select2 Elements
