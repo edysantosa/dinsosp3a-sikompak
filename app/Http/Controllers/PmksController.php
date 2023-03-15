@@ -62,7 +62,7 @@ class PmksController extends Controller
      */
     public function create()
     {
-        //
+        return view('pmks.create', ['roles' => \App\Models\Role::all()]);
     }
 
     /**
@@ -73,7 +73,18 @@ class PmksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            [
+                'nik'       => 'required|max:16|unique:pmks',
+                'kartu_keluarga'       => 'required|max:16',
+                'bpjs_kesehatan'       => 'required|max:13|unique:pmks',
+                'nama'       => 'required|max:255|unique:pmks',
+            ],
+            ['year.date_format' => 'Masukkan tahun yang valid']
+        );
+
+        $pmks = Pmks::create($request->except('_token'));
+        return redirect(route('pmks.index'));
     }
 
     /**

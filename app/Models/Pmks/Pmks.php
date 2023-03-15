@@ -3,16 +3,34 @@
 namespace App\Models\Pmks;
 
 use App\Models\Pmks\JenisPmksPmks;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 class Pmks extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUlids;
 
     protected $table = 'pmks';
 
+    protected $fillable = [
+        'nik',
+        'kartu_keluarga',
+        'bpjs_kesehatan',
+        'nama',
+    ];
+
+
+    /**
+     * Get the columns that should receive a unique identifier.
+     *
+     * @return array
+     */
+    public function uniqueIds()
+    {
+        return ['uid'];
+    }
 
     /******************************************************************************/
     /**

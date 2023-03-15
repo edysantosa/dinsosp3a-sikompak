@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pmks', function (Blueprint $table) {
             $table->id();
-
+            $table->ulid('uid');
             $table->string('nik', 16)->nullable();
             $table->string('kartu_keluarga', 16)->nullable();
             $table->string('bpjs_kesehatan', 13)->nullable();

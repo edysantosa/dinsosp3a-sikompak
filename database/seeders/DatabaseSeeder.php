@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
 
         // Seeder untuk data dummy, jangan digunakan untuk deploy ke production
         $this->call([LembagaKesejahteraanSosialSeeder::class]);
-        // $this->call([PmksSeeder::class]);
+        $this->call([PmksSeeder::class]);
     }
 }

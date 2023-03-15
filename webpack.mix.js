@@ -22,6 +22,7 @@ mix.autoload({
     .js('resources/js/user-create.js', 'js')
     .js('resources/js/profile.js', 'js')
     .js('resources/js/pmks.js', 'js')
+    .js('resources/js/pmks-create.js', 'js')
     .postCss('resources/css/app.css', 'css')
     .postCss('resources/css/login.css', 'css')
     // .sass('resources/scss/app.scss', 'css')

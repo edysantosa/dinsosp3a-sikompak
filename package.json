@@ -21,6 +21,7 @@
         "jquery": "^3.6.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "moment": "^2.29.4",
         "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
         "store": "^2.0.12",

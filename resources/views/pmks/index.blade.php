@@ -91,7 +91,7 @@
 
             <div class="card">
                 <div class="card-header">
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-app bg-primary">
+                        <a href="{{ route('pmks.create') }}" class="btn btn-app bg-primary">
                             <i class="fas fa-user-plus"></i> Tambah PMKS
                         </a>
                 </div>
@@ -119,5 +119,5 @@
 @endsection
 
 @section('pagescript')
-<script src="{{ asset('dist/js/pmks.js') }}"></script>
+<script src="{{ mix('/js/pmks.js', 'dist') }}"></script>
 @stop
