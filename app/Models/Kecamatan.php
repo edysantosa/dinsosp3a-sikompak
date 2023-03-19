@@ -13,4 +13,9 @@ class Kecamatan extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
+
+    public function kelurahan()
+    {
+        return $this->hasMany('App\Models\Kelurahan');
+    }
 }

@@ -13,4 +13,9 @@ class KabupatenKota extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
+
+    public function kecamatan()
+    {
+        return $this->hasMany('App\Models\Kecamatan');
+    } 
 }

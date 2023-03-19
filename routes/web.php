@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -52,3 +53,7 @@ Route::prefix('user')->middleware(['auth', 'auth.roles:is-admin,is-user'])->name
 
 // PMKS Routes
 Route::resource('/pmks', PmksController::class)->middleware(['auth', 'auth.roles:is-admin,is-user']);
+
+
+// Routes untuk alamat
+Route::get('/address/kabupaten', [AddressController::class, 'kabupaten'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('address.kabupaten');

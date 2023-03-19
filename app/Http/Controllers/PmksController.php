@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\Pmks\JenisPmks;
 use App\Models\Pmks\Pmks;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -62,7 +66,11 @@ class PmksController extends Controller
      */
     public function create()
     {
-        return view('pmks.create', ['roles' => \App\Models\Role::all()]);
+        $provinsi = \App\Models\Provinsi::with(['kabupatenKota', 'kabupatenKota.kecamatan', 'kabupatenKota.kecamatan.kelurahan'])->where('id', '51')->first();
+        return view('pmks.create', [
+            'provinsi' => \App\Models\Provinsi::all(),
+            'bali' => $provinsi,
+        ]);
     }
 
     /**
