@@ -57,3 +57,5 @@ Route::resource('/pmks', PmksController::class)->middleware(['auth', 'auth.roles
 
 // Routes untuk alamat
 Route::get('/address/kabupaten', [AddressController::class, 'kabupaten'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('address.kabupaten');
+Route::get('/address/kecamatan', [AddressController::class, 'kecamatan'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('address.kecamatan');
+Route::get('/address/kelurahan', [AddressController::class, 'kelurahan'])->middleware(['auth', 'auth.roles:is-admin,is-user'])->name('address.kelurahan');

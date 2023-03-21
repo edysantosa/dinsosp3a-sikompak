@@ -7,6 +7,7 @@ window.moment = require('moment');
 require ('../adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js');
 
 import select2 from '../adminlte/plugins/select2/js/select2.full.min.js';
+import toastr from '../adminlte/plugins/toastr/toastr.min.js';
 
 $(document).ready(function() {
     $('#pmks-create-form').validate({
@@ -47,7 +48,6 @@ $(document).ready(function() {
 }).on('change', '#pmks-provinsi', function(e){
     // console.log($(this).find(":selected").val());
     // console.log($(this).select2('data'));
-
     $.ajax({
         url      : `/address/kabupaten`,
         type     : 'get',
@@ -72,15 +72,80 @@ $(document).ready(function() {
         toastr.error(message);
 
     }).done(function( response ){
+        console.log('asdasd');
+        $("#pmks-kabupaten").html('');
         for (var i = 0; i < response.kabupaten.length; i++) {
-            $("#pmks-kabupaten").append(new Option(response.kabupaten[i].nama, response.kabupaten[i].kabupaten_id, true, true));
+            $("#pmks-kabupaten").append(new Option(response.kabupaten[i].nama, response.kabupaten[i].id, true, true));
         }
-        $("#pmks-kabupaten").trigger('change');
+        $("#pmks-kabupaten").val($('#pmks-kabupaten option:eq(0)').val()).trigger('change');
     }).always(function(){
     });
+}).on('change', '#pmks-kabupaten', function(e){
+    $.ajax({
+        url      : `/address/kecamatan`,
+        type     : 'get',
+        dataType : 'json',
+        data     : {kabupaten_kota_id:$(this).find(":selected").val()},
+        headers  : {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        beforeSend: function() {
+            $('#kecamatan-loader').show();
+            $("#pmks-kecamatan").prop("disabled", true);
+        },
+        complete: function() {
+            $('#kecamatan-loader').hide();
+            $("#pmks-kecamatan").prop("disabled", false);
+        },
+    }).fail(function(xhr, status, statusText){
+        var message = "Unknown error has occured";
+        if( xhr.responseJSON ){
+            message = xhr.responseJSON.message;
+        }
+        toastr.error(message);
 
+    }).done(function( response ){
+        $("#pmks-kecamatan").html('');
+        for (var i = 0; i < response.kecamatan.length; i++) {
+            $("#pmks-kecamatan").append(new Option(response.kecamatan[i].nama, response.kecamatan[i].id, true, true));
+        }
+        $("#pmks-kecamatan").val($('#pmks-kecamatan option:eq(0)').val()).trigger('change');
+    }).always(function(){
+    });
+}).on('change', '#pmks-kecamatan', function(e){
+    $.ajax({
+        url      : `/address/kelurahan`,
+        type     : 'get',
+        dataType : 'json',
+        data     : {kecamatan_id:$(this).find(":selected").val()},
+        headers  : {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        beforeSend: function() {
+            $('#kelurahan-loader').show();
+            $("#pmks-kelurahan").prop("disabled", true);
+        },
+        complete: function() {
+            $('#kelurahan-loader').hide();
+            $("#pmks-kelurahan").prop("disabled", false);
+        },
+    }).fail(function(xhr, status, statusText){
+        var message = "Unknown error has occured";
+        if( xhr.responseJSON ){
+            message = xhr.responseJSON.message;
+        }
+        toastr.error(message);
+
+    }).done(function( response ){
+        $("#pmks-kelurahan").html('');
+        for (var i = 0; i < response.kelurahan.length; i++) {
+            $("#pmks-kelurahan").append(new Option(response.kelurahan[i].nama, response.kelurahan[i].id, true, true));
+        }
+        $("#pmks-kelurahan").val($('#pmks-kelurahan option:eq(0)').val()).trigger('change');
+    }).always(function(){
+    });
 });
 
-$('.select2').select2({
-    theme: 'bootstrap4'
-})
+// $('.select2').select2({
+//     theme: 'bootstrap4'
+// })

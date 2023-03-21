@@ -67,20 +67,20 @@
     </div>
 
     <div class="form-group row">
-        <label for="student-sex" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+        <label for="student-jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
         <div class="col-sm-10">
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sex" value="1" {{old('sex', 1) == 1 ? 'checked=""' : ""}}>
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="1" {{old('jenis_kelamin', 1) == 1 ? 'checked=""' : ""}}>
                     <label class="form-check-label">Laki-laki</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sex" value="2" {{old('sex') == 2 ? 'checked=""' : ""}}>
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="2" {{old('jenis_kelamin') == 2 ? 'checked=""' : ""}}>
                     <label class="form-check-label">Perempuan</label>
                 </div>
             </div>
 
-            @error('sex')
+            @error('jenis_kelamin')
             <span class="error invalid-feedback">
                 {{ $message }}
             </span>
@@ -134,7 +134,7 @@
         <div class="col-sm-2 offset-sm-2">
             <div class="form-group">
                 <label>Provinsi</label>
-                <select class="form-control select2  @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi">
+                <select class="form-control select2  @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi" autocomplete="off">
                     @php
                         $selProv = old('provinsi_id') ?? $pmks->provinsi_id ?? 51;
                     @endphp
@@ -153,7 +153,13 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label>Kabupaten/Kota <i id="kabupaten-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                <select class="form-control select2  @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten" disabled="disabled">
+                <select class="form-control select2  @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten" autocomplete="off">
+                    @php
+                        $selKab = old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? '51.71';
+                    @endphp
+                    @foreach ($kabupaten as $kab)
+                        <option value="{{ $kab->id }}" {!! $selKab == $kab->id ? 'selected="selected"' : "" !!}>{{ $kab->nama }}</option>
+                    @endforeach
                 </select>
 
                 @error('kabupaten_kota_id')
@@ -166,7 +172,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label>Kecamatan <i id="kecamatan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                <select class="form-control select2  @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan" disabled="disabled">
+                <select class="form-control select2  @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan" autocomplete="off">
+                    @php
+                        $selKec = old('kecamatan_id') ?? $pmks->kecamatan_id ?? '51.71.02';
+                    @endphp
+                    @foreach ($kecamatan as $kec)
+                        <option value="{{ $kec->id }}" {!! $selKec == $kec->id ? 'selected="selected"' : "" !!}>{{ $kec->nama }}</option>
+                    @endforeach
                 </select>
 
                 @error('kecamatan_id')
@@ -179,7 +191,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label>Kelurahan <i id="kelurahan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                <select class="form-control select2  @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan" disabled="disabled">
+                <select class="form-control select2  @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan" autocomplete="off">
+                    @php
+                        $selKel = old('kelurahan_id') ?? $pmks->kelurahan_id ?? '51.71.02.2001';
+                    @endphp
+                    @foreach ($kelurahan as $kel)
+                        <option value="{{ $kel->id }}" {!! $selKel == $kel->id ? 'selected="selected"' : "" !!}>{{ $kel->nama }}</option>
+                    @endforeach
                 </select>
 
                 @error('kelurahan_id')

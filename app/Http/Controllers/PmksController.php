@@ -66,10 +66,12 @@ class PmksController extends Controller
      */
     public function create()
     {
-        $provinsi = \App\Models\Provinsi::with(['kabupatenKota', 'kabupatenKota.kecamatan', 'kabupatenKota.kecamatan.kelurahan'])->where('id', '51')->first();
+        // $provinsi = \App\Models\Provinsi::with(['kabupatenKota', 'kabupatenKota.kecamatan', 'kabupatenKota.kecamatan.kelurahan'])->where('id', '51')->first();
         return view('pmks.create', [
             'provinsi' => \App\Models\Provinsi::all(),
-            'bali' => $provinsi,
+            'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
+            'kecamatan' => \App\Models\Kecamatan::where('kabupaten_kota_id', '51.71')->get(),
+            'kelurahan' => \App\Models\Kelurahan::where('kecamatan_id', '51.71.02')->get(),
         ]);
     }
 
