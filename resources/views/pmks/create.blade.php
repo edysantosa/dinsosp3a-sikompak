@@ -26,14 +26,10 @@
     <div class="row">
         <div class="col-md-12">
 
-            <!-- Horizontal Form -->
-            <div class="card">
-                <!-- form start -->
-                <form id="pmks-create-form" class="form-horizontal" action="{{ route('pmks.store') }}" method="post">
-                    @include('pmks.partials.form', ['create' => true])
-                </form>
-            </div>
-            <!-- /.card -->
+            <!-- form start -->
+            <form id="pmks-create-form" class="form-horizontal" action="{{ route('pmks.store') }}" method="post" autocomplete="off">
+                @include('pmks.partials.form', ['create' => true])
+            </form>
 
         </div>
     </div>

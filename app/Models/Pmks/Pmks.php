@@ -16,9 +16,15 @@ class Pmks extends Model
 
     protected $fillable = [
         'nik',
+        'tanggal_lahir',
         'kartu_keluarga',
         'bpjs_kesehatan',
         'nama',
+        'jenis_kelamin',
+        'provinsi_id',
+        'kabupaten_kota_id',
+        'kecamatan_id',
+        'kelurahan_id',
     ];
 
 

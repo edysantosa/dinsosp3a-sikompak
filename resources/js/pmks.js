@@ -91,6 +91,11 @@ $(document).ready(function() {
     } else {
         $('#search-card').CardWidget('collapse');
     }
+
+    //Initialize Select2 Elements
+    $('.select2').select2({
+        theme: 'bootstrap4'
+    })
 }).on('click', '#btn-search-undo', function(e){
     $(':input').not(':button, :submit, :reset, :hidden, .select2')
     .removeAttr('checked')
@@ -143,8 +148,3 @@ $(document).ready(function() {
         break;
     }  
 });
-
-//Initialize Select2 Elements
-$('.select2').select2({
-    theme: 'bootstrap4'
-})

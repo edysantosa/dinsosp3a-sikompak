@@ -8,7 +8,10 @@ use App\Models\Kelurahan;
 use App\Models\Pmks\JenisPmks;
 use App\Models\Pmks\Pmks;
 use App\Models\Provinsi;
+use App\Models\Psks\LembagaKesejahteraanSosial;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class PmksController extends Controller
@@ -72,6 +75,8 @@ class PmksController extends Controller
             'kabupaten' => \App\Models\KabupatenKota::where('provinsi_id', '51')->get(),
             'kecamatan' => \App\Models\Kecamatan::where('kabupaten_kota_id', '51.71')->get(),
             'kelurahan' => \App\Models\Kelurahan::where('kecamatan_id', '51.71.02')->get(),
+            'jenisPmks' => \App\Models\Pmks\JenisPmks::all(),
+            'lembagaKs' => \App\Models\Psks\LembagaKesejahteraanSosial::all(),
         ]);
     }
 
@@ -85,15 +90,24 @@ class PmksController extends Controller
     {
         $this->validate($request,
             [
-                'nik'       => 'required|max:16|unique:pmks',
-                'kartu_keluarga'       => 'required|max:16',
-                'bpjs_kesehatan'       => 'required|max:13|unique:pmks',
-                'nama'       => 'required|max:255|unique:pmks',
-            ],
-            ['year.date_format' => 'Masukkan tahun yang valid']
+                'nik'           => 'required|max:16|unique:pmks',
+                'nama'          => 'required|max:255',
+                'tanggal_lahir' => 'required|date_format:d/m/Y',
+            ]
         );
+        $request->merge(['tanggal_lahir' => \Carbon\Carbon::createFromFormat('d/m/Y', $request->tanggal_lahir)->format('Y-m-d')]);
 
-        $pmks = Pmks::create($request->except('_token'));
+        DB::transaction(function () use ($request) {
+            $pmks = Pmks::create($request->except('_token'));
+        });
+        // dd($request->except('_token'));
+
+        // try {
+        //     $pmks = Pmks::create($request->except('_token'));
+        // } catch (QueryException $e) {
+        //     dd($request);
+        // }
+
         return redirect(route('pmks.index'));
     }
 

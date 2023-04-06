@@ -18,6 +18,9 @@ $(document).ready(function() {
             nama: {
                 required: true,
             },
+            tanggal_lahir: {
+                required: true,
+            },
         },
         messages: {
             nik: {
@@ -25,6 +28,9 @@ $(document).ready(function() {
             },
             nama: {
                 required: "Masukkan Nama",
+            },
+            tanggal_lahir: {
+                required: "Masukkan tanggal lahir",
             },
         },
         errorElement: 'span',
@@ -45,6 +51,11 @@ $(document).ready(function() {
         locale : 'id'
     });
     $('#tanggal-lahir').datetimepicker('date', moment($('#student-tanggal-lahir').data('old')));
+
+    $('.select2').select2();
+
+    // Tampilkan form jenis pmks yang sudah terpilih sebelumnya
+    let selectedJenis = $("#jenis-pmks").val();
 }).on('change', '#pmks-provinsi', function(e){
     // console.log($(this).find(":selected").val());
     // console.log($(this).select2('data'));
@@ -144,8 +155,16 @@ $(document).ready(function() {
         $("#pmks-kelurahan").val($('#pmks-kelurahan option:eq(0)').val()).trigger('change');
     }).always(function(){
     });
+}).on('select2:select', '#jenis-pmks', function(e){
+    var data = e.params.data;
+    $(`.card-jenis-pmks*[data-jenis="${data.id}"]`).show();
+}).on('select2:unselect', '#jenis-pmks', function(e){
+    var data = e.params.data;
+    $(`.card-jenis-pmks*[data-jenis="${data.id}"]`).hide();
 });
 
-// $('.select2').select2({
-//     theme: 'bootstrap4'
-// })
+$('.terlantar-asuhan').on('change', function() {
+    if ($(this).val() == 'keluarga') {
+
+    }
+});

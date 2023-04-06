@@ -1,9 +1,9 @@
 @import '../adminlte/plugins/fontawesome-free/css/all.min.css';
-@import '../adminlte/dist/css/adminlte.min.css';
 @import '../adminlte/plugins/toastr/toastr.min.css';
 @import '../adminlte/plugins/select2/css/select2.min.css';
 @import '../adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.css';
 @import '../adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
+@import '../adminlte/dist/css/adminlte.min.css';
 
 @import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
 @import 'datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css';
