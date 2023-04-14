@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="pmks-jenis_kelamin" class="col-sm-2 col-form-label">Jenis kelamin</label>
+            <label class="col-sm-2 col-form-label">Jenis kelamin</label>
             <div class="col-sm-10">
                 <div class="form-group">
                     <div class="form-check">
@@ -130,12 +130,11 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-sm-2 offset-sm-2">
                 <div class="form-group">
                     <label>Provinsi</label>
-                    <select class="form-control select2  @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi_id">
+                    <select class="form-control select2  @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi_id" data-old="{{old('provinsi_id') ?? $pmks->provinsi_id ?? ""}}">
                         @php
                             $selProv = old('provinsi_id') ?? $pmks->provinsi_id ?? 51;
                         @endphp
@@ -154,7 +153,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label>Kabupaten/Kota <i id="kabupaten-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten_kota_id">
+                    <select class="form-control select2  @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten_kota_id" data-old="{{old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? ""}}">
                         @php
                             $selKab = old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? '51.71';
                         @endphp
@@ -173,7 +172,7 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label>Kecamatan <i id="kecamatan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan_id">
+                    <select class="form-control select2  @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan_id" data-old="{{old('kecamatan_id') ?? $pmks->kecamatan_id ?? ""}}">
                         @php
                             $selKec = old('kecamatan_id') ?? $pmks->kecamatan_id ?? '51.71.02';
                         @endphp
@@ -192,7 +191,7 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label>Kelurahan <i id="kelurahan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan_id">
+                    <select class="form-control select2  @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan_id" data-old="{{old('kelurahan_id') ?? $pmks->kelurahan_id ?? ""}}">
                         @php
                             $selKel = old('kelurahan_id') ?? $pmks->kelurahan_id ?? '51.71.02.2001';
                         @endphp
@@ -241,7 +240,7 @@
  
 <div class="row">
     <div class="col-md-6">
-        <div class="card card-primary card-outline card-jenis-pmks" data-jenis="1">
+        <div class="card card-primary card-outline card-jenis-pmks" data-jenis="1" style="display: none;">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Terlantar</h3>
                 <div class="card-tools">
@@ -251,19 +250,19 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input terlantar-asuhan" type="radio" name="terlantar_asuhan" value="panti" checked="checked">
-                        <label class="form-check-label" for="terlantar-asuhan-panti">Asuhan keluarga</label>
+                        <input id="terlantar-asuhan-keluarga" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="keluarga" checked="checked">
+                        <label class="form-check-label" for="terlantar-asuhan-keluarga">Asuhan keluarga</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input terlantar-asuhan" type="radio" name="terlantar_asuhan" value="keluarga">
-                        <label class="form-check-label" for="terlantar-asuhan-keluarga">Asuhan panti</label>
+                        <input id="terlantar-asuhan-panti" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="panti">
+                        <label class="form-check-label" for="terlantar-asuhan-panti">Asuhan panti</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="pmks-nama-keluarga" class="col-sm-3 col-form-label">Nama keluarga</label>
+                    <label for="terlantar-nama-keluarga" class="col-sm-3 col-form-label">Nama keluarga</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control terlantar-asuhan-keluarga @error('nama_keluarga') is-invalid @enderror" id="pmks-nama-keluarga" name="nama_keluarga" placeholder="Nama keluarga yang mengasuh" maxlength="100" 
+                        <input type="text" class="form-control terlantar-asuhan-keluarga @error('nama_keluarga') is-invalid @enderror" id="terlantar-nama-keluarga" name="nama_keluarga" placeholder="Nama keluarga yang mengasuh" maxlength="100" 
                         value="{{old('nama_keluarga') ?? $pmks->nama_keluarga ?? ""}}">
 
                         @error('nama_keluarga')
@@ -274,9 +273,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="pmks-hubungan-keluarga" class="col-sm-3 col-form-label">Hubungan keluarga</label>
+                    <label for="terlantar-hubungan-keluarga" class="col-sm-3 col-form-label">Hubungan keluarga</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control terlantar-asuhan-keluarga @error('hubungan_keluarga') is-invalid @enderror" id="pmks-hubungan-keluarga" name="hubungan_keluarga" placeholder="Hubungan keluarga yang mengasuh" maxlength="100" 
+                        <input type="text" class="form-control terlantar-asuhan-keluarga @error('hubungan_keluarga') is-invalid @enderror" id="terlantar-hubungan-keluarga" name="hubungan_keluarga" placeholder="Hubungan keluarga yang mengasuh" maxlength="100" 
                         value="{{old('hubungan_keluarga') ?? $pmks->hubungan_keluarga ?? ""}}">
 
                         @error('hubungan_keluarga')
@@ -288,9 +287,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="pmks-panti-pengasuh" class="col-sm-3 col-form-label">Panti pengasuh</label>
+                    <label for="terlantar-panti-pengasuh" class="col-sm-3 col-form-label">Panti pengasuh</label>
                     <div class="col-sm-9">
-                        <select class="form-control select2 terlantar-asuhan-panti" id="pmks-panti-pengasuh" name="lembaga_kesejahteraan_sosial_id" data-placeholder="Pilih panti yang mengasuh" style="width: 100%;">
+                        <select class="form-control select2 terlantar-asuhan-panti" id="terlantar-panti-pengasuh" name="lembaga_kesejahteraan_sosial_id" data-placeholder="Pilih panti yang mengasuh" style="width: 100%;" disabled="disabled">
                             @foreach($lembagaKs as $lembaga)
                                 <option value="{{ $lembaga->id }}"
                                     @isset($pmks)

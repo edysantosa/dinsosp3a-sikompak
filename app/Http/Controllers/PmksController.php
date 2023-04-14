@@ -88,9 +88,12 @@ class PmksController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request,
             [
-                'nik'           => 'required|max:16|unique:pmks',
+                'nik'           => 'max:16|unique:pmks',
+                'kartu_keluarga'           => 'max:16|unique:pmks',
+                'bpjs_kesehatan'           => 'max:13|unique:pmks',
                 'nama'          => 'required|max:255',
                 'tanggal_lahir' => 'required|date_format:d/m/Y',
             ]

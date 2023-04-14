@@ -50,12 +50,20 @@ $(document).ready(function() {
         format: 'L',
         locale : 'id'
     });
-    $('#tanggal-lahir').datetimepicker('date', moment($('#student-tanggal-lahir').data('old')));
+    $('#tanggal-lahir').datetimepicker('date', moment($('#pmks-tanggal-lahir').data('old')));
 
     $('.select2').select2();
 
+
+    // Trigger change untuk data old di alamat
+    let oldProvinsi = $('#pmks-provinsi').data('old') || $('#pmks-provinsi option:eq(0)').val();
+    $('#pmks-provinsi').val(oldProvinsi).trigger('change');
+
     // Tampilkan form jenis pmks yang sudah terpilih sebelumnya
-    let selectedJenis = $("#jenis-pmks").val();
+    // TBA
+    // let selectedJenis = $("#jenis-pmks").val();
+
+
 }).on('change', '#pmks-provinsi', function(e){
     // console.log($(this).find(":selected").val());
     // console.log($(this).select2('data'));
@@ -83,12 +91,14 @@ $(document).ready(function() {
         toastr.error(message);
 
     }).done(function( response ){
-        console.log('asdasd');
         $("#pmks-kabupaten").html('');
         for (var i = 0; i < response.kabupaten.length; i++) {
             $("#pmks-kabupaten").append(new Option(response.kabupaten[i].nama, response.kabupaten[i].id, true, true));
         }
-        $("#pmks-kabupaten").val($('#pmks-kabupaten option:eq(0)').val()).trigger('change');
+
+        // Trigger change untuk data old di alamat
+        let oldKabupaten = $('#pmks-kabupaten').data('old') || $('#pmks-kabupaten option:eq(0)').val();
+        $("#pmks-kabupaten").val(oldKabupaten).trigger('change');
     }).always(function(){
     });
 }).on('change', '#pmks-kabupaten', function(e){
@@ -120,7 +130,10 @@ $(document).ready(function() {
         for (var i = 0; i < response.kecamatan.length; i++) {
             $("#pmks-kecamatan").append(new Option(response.kecamatan[i].nama, response.kecamatan[i].id, true, true));
         }
-        $("#pmks-kecamatan").val($('#pmks-kecamatan option:eq(0)').val()).trigger('change');
+
+        // Trigger change untuk data old di alamat
+        let oldKecamatan = $('#pmks-kecamatan').data('old') || $('#pmks-kecamatan option:eq(0)').val();
+        $("#pmks-kecamatan").val(oldKecamatan).trigger('change');
     }).always(function(){
     });
 }).on('change', '#pmks-kecamatan', function(e){
@@ -152,19 +165,30 @@ $(document).ready(function() {
         for (var i = 0; i < response.kelurahan.length; i++) {
             $("#pmks-kelurahan").append(new Option(response.kelurahan[i].nama, response.kelurahan[i].id, true, true));
         }
-        $("#pmks-kelurahan").val($('#pmks-kelurahan option:eq(0)').val()).trigger('change');
+
+        // Trigger change untuk data old di alamat
+        let oldKelurahan = $('#pmks-kelurahan').data('old') || $('#pmks-kelurahan option:eq(0)').val();
+        $("#pmks-kelurahan").val(oldKelurahan).trigger('change');
     }).always(function(){
     });
-}).on('select2:select', '#jenis-pmks', function(e){
+}).on('select2:select', '#pmks-jenis-pmks', function(e){
     var data = e.params.data;
     $(`.card-jenis-pmks*[data-jenis="${data.id}"]`).show();
-}).on('select2:unselect', '#jenis-pmks', function(e){
+}).on('select2:unselect', '#pmks-jenis-pmks', function(e){
     var data = e.params.data;
     $(`.card-jenis-pmks*[data-jenis="${data.id}"]`).hide();
 });
 
-$('.terlantar-asuhan').on('change', function() {
-    if ($(this).val() == 'keluarga') {
 
+// Kode untuk jenis-jenis PMKS
+$('.terlantar-pengasuh').on('change', function() {
+    if ($(this).val() == 'keluarga') {
+        $('#terlantar-nama-keluarga').prop("disabled", false);
+        $('#terlantar-hubungan-keluarga').prop("disabled", false);
+        $('#terlantar-panti-pengasuh').prop("disabled", true);
+    } else {
+        $('#terlantar-nama-keluarga').prop("disabled", true);
+        $('#terlantar-hubungan-keluarga').prop("disabled", true);
+        $('#terlantar-panti-pengasuh').prop("disabled", false);
     }
 });
