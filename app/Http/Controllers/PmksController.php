@@ -91,11 +91,11 @@ class PmksController extends Controller
         // dd($request);
         $this->validate($request,
             [
-                'nik'           => 'max:16|unique:pmks',
-                'kartu_keluarga'           => 'max:16|unique:pmks',
-                'bpjs_kesehatan'           => 'max:13|unique:pmks',
-                'nama'          => 'required|max:255',
-                'tanggal_lahir' => 'required|date_format:d/m/Y',
+                'nik'            => 'nullable|sometimes|max:16|unique:pmks',
+                'kartu_keluarga' => 'nullable|sometimes|max:16|unique:pmks',
+                'bpjs_kesehatan' => 'nullable|sometimes|max:13|unique:pmks',
+                'nama'           => 'required|max:255',
+                'tanggal_lahir'  => 'required|date_format:d/m/Y',
             ]
         );
         $request->merge(['tanggal_lahir' => \Carbon\Carbon::createFromFormat('d/m/Y', $request->tanggal_lahir)->format('Y-m-d')]);
