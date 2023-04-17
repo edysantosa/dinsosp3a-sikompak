@@ -134,12 +134,13 @@
             <div class="col-sm-2 offset-sm-2">
                 <div class="form-group">
                     <label>Provinsi</label>
-                    <select class="form-control select2  @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi_id" data-old="{{old('provinsi_id') ?? $pmks->provinsi_id ?? ""}}">
-                        @php
+                    <select class="form-control select2 select-address @error('provinsi_id') is-invalid @enderror" id="pmks-provinsi" name="provinsi_id" data-old="{{old('provinsi_id') ?? $pmks->provinsi_id ?? ""}}">
+                        {{-- @php
                             $selProv = old('provinsi_id') ?? $pmks->provinsi_id ?? 51;
-                        @endphp
+                        @endphp --}}
                         @foreach ($provinsi as $prov)
-                            <option value="{{ $prov->id }}" {!! $selProv == $prov->id ? 'selected="selected"' : "" !!}>{{ $prov->nama }}</option>
+                            {{-- <option value="{{ $prov->id }}" {!! $selProv == $prov->id ? 'selected="selected"' : "" !!}>{{ $prov->nama }}</option> --}}
+                            <option value="{{ $prov->id }}">{{ $prov->nama }}</option>
                         @endforeach
                     </select>
 
@@ -153,12 +154,9 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label>Kabupaten/Kota <i id="kabupaten-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten_kota_id" data-old="{{old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? ""}}">
-                        @php
-                            $selKab = old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? '51.71';
-                        @endphp
+                    <select class="form-control select2 select-address @error('kabupaten_kota_id') is-invalid @enderror" id="pmks-kabupaten" name="kabupaten_kota_id" data-old="{{old('kabupaten_kota_id') ?? $pmks->kabupaten_kota_id ?? ""}}">
                         @foreach ($kabupaten as $kab)
-                            <option value="{{ $kab->id }}" {!! $selKab == $kab->id ? 'selected="selected"' : "" !!}>{{ $kab->nama }}</option>
+                            <option value="{{ $kab->id }}">{{ $kab->nama }}</option>
                         @endforeach
                     </select>
 
@@ -172,12 +170,9 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label>Kecamatan <i id="kecamatan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan_id" data-old="{{old('kecamatan_id') ?? $pmks->kecamatan_id ?? ""}}">
-                        @php
-                            $selKec = old('kecamatan_id') ?? $pmks->kecamatan_id ?? '51.71.02';
-                        @endphp
+                    <select class="form-control select2 select-address @error('kecamatan_id') is-invalid @enderror" id="pmks-kecamatan" name="kecamatan_id" data-old="{{old('kecamatan_id') ?? $pmks->kecamatan_id ?? ""}}">
                         @foreach ($kecamatan as $kec)
-                            <option value="{{ $kec->id }}" {!! $selKec == $kec->id ? 'selected="selected"' : "" !!}>{{ $kec->nama }}</option>
+                            <option value="{{ $kec->id }}"}>{{ $kec->nama }}</option>
                         @endforeach
                     </select>
 
@@ -191,12 +186,9 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label>Kelurahan <i id="kelurahan-loader" class="fas fa-spin fa-spinner"  style="display:none;"></i></label>
-                    <select class="form-control select2  @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan_id" data-old="{{old('kelurahan_id') ?? $pmks->kelurahan_id ?? ""}}">
-                        @php
-                            $selKel = old('kelurahan_id') ?? $pmks->kelurahan_id ?? '51.71.02.2001';
-                        @endphp
+                    <select class="form-control select2 select-address @error('kelurahan_id') is-invalid @enderror" id="pmks-kelurahan" name="kelurahan_id" data-old="{{old('kelurahan_id') ?? $pmks->kelurahan_id ?? ""}}">
                         @foreach ($kelurahan as $kel)
-                            <option value="{{ $kel->id }}" {!! $selKel == $kel->id ? 'selected="selected"' : "" !!}>{{ $kel->nama }}</option>
+                            <option value="{{ $kel->id }}">{{ $kel->nama }}</option>
                         @endforeach
                     </select>
 
@@ -215,9 +207,11 @@
                 <select class="form-control select2" id="pmks-jenis-pmks" name="jenis_pmks[]" multiple="multiple" data-placeholder="Pilih masalah kesejahteraan sosial yang dialami" style="width: 100%;">
                     @foreach($jenisPmks as $jenis)
                         <option value="{{ $jenis->id }}"
-                            @isset($pmks)
+                            @if(isset($pmks))
                                 @if(in_array($jenis->id, $pmks->jenis->pluck('id')->toArray())) selected="selected" @endif
-                            @endisset
+                            @elseif (old('jenis_pmks'))
+                                @if(in_array($jenis->id, old('jenis_pmks'))) selected="selected" @endif
+                            @endif
                         >{{ $jenis->nama }}</option>
                     @endforeach
                 </select>

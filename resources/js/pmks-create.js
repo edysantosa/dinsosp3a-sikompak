@@ -50,20 +50,27 @@ $(document).ready(function() {
         format: 'L',
         locale : 'id'
     });
-    $('#tanggal-lahir').datetimepicker('date', moment($('#pmks-tanggal-lahir').data('old')));
+    $('#tanggal-lahir').datetimepicker('date', moment($('#pmks-tanggal-lahir').data('old'), 'DD/MM/YYYY'));
 
     $('.select2').select2();
 
 
     // Trigger change untuk data old di alamat
-    let oldProvinsi = $('#pmks-provinsi').data('old') || $('#pmks-provinsi option:eq(0)').val();
+    let oldProvinsi = $('#pmks-provinsi').data('old') || '51';
     $('#pmks-provinsi').val(oldProvinsi).trigger('change');
 
     // Tampilkan form jenis pmks yang sudah terpilih sebelumnya
     // TBA
-    // let selectedJenis = $("#jenis-pmks").val();
+    let selectedJenis = $("#pmks-jenis-pmks").val();
+    for (var i = selectedJenis.length - 1; i >= 0; i--) {
+        $(`.card-jenis-pmks*[data-jenis="${selectedJenis[i]}"]`).show();
+    }
 
-
+}).on('change', '.select-address', function(e){
+    //Kosongkan old value jika provinsi berubah
+    if ($(this).find(":selected").val() != $(this).data('old')) {
+        $('.select-address').data('old', '');
+    }
 }).on('change', '#pmks-provinsi', function(e){
     // console.log($(this).find(":selected").val());
     // console.log($(this).select2('data'));
