@@ -23,6 +23,7 @@ return new class extends Migration
              * Apabila diasuh keluarga, kolom nama keluarga dan hubungan keluarga diisi
              * Jika diasuh oleh panti diisi id lembaga kesejahteraan sosial
              */
+            $table->unsignedTinyInteger('pengasuh')->comment('1 Keluarga, 2 Panti');
             $table->string('nama_keluarga')->nullable();
             $table->string('hubungan_keluarga')->nullable();
 

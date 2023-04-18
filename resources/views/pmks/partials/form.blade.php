@@ -244,11 +244,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check form-check-inline">
-                        <input id="terlantar-asuhan-keluarga" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="keluarga" checked="checked">
+                        <input id="terlantar-asuhan-keluarga" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="1"
+                            @if(isset($pmks))
+                                @if($pmks->pengasuh == 1) checked="checked" @endif
+                            @elseif (old('terlantar_asuhan'))
+                                @if(old('terlantar_asuhan') == 1) checked="checked" @endif
+                            @endif
+                        >
                         <label class="form-check-label" for="terlantar-asuhan-keluarga">Asuhan keluarga</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input id="terlantar-asuhan-panti" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="panti">
+                        <input id="terlantar-asuhan-panti" class="form-check-input terlantar-pengasuh" type="radio" name="terlantar_asuhan" value="2"
+                            @if(isset($pmks))
+                                @if($pmks->pengasuh == 2) checked="checked" @endif
+                            @elseif (old('terlantar_asuhan'))
+                                @if(old('terlantar_asuhan') == 2) checked="checked" @endif
+                            @endif
+                        >
                         <label class="form-check-label" for="terlantar-asuhan-panti">Asuhan panti</label>
                     </div>
                 </div>
