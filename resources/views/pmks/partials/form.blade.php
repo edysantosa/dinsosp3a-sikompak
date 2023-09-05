@@ -236,7 +236,7 @@
     <div class="col-md-6">
         <div class="card card-primary card-outline card-jenis-pmks" data-jenis="1" style="display: none;">
             <div class="card-header">
-                <h3 class="card-title font-weight-bold">Terlantar</h3>
+                <h3 class="card-title font-weight-bold">Pengasuh</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
@@ -249,6 +249,8 @@
                                 @if($pmks->pengasuh == 1) checked="checked" @endif
                             @elseif (old('terlantar_asuhan'))
                                 @if(old('terlantar_asuhan') == 1) checked="checked" @endif
+                            @else
+                                checked="checked"
                             @endif
                         >
                         <label class="form-check-label" for="terlantar-asuhan-keluarga">Asuhan keluarga</label>

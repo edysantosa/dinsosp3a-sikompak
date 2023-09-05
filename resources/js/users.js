@@ -38,13 +38,14 @@ $(document).ready(function() {
         language: datatableId,
     });
 }).on('click', '.trigger', function(e){
-    // let current_row = $(this).parents('tr');
-    // if (current_row.hasClass('child')) {
-    //     current_row = current_row.prev();
-    // }
-    // let id = current_row.attr('id');
+    let current_row = $(this).parents('tr');
+    if (current_row.hasClass('child')) {
+        current_row = current_row.prev();
+    }
+    let id = current_row.attr('id');
 
-    let id = $(this).parents('tr').attr('id');
+
+    // let id = $(this).parents('tr').attr('id');
     let $button = $(this);
     
     switch($(this).data('trigger')) {

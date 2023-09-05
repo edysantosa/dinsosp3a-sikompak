@@ -189,7 +189,8 @@ $(document).ready(function() {
 
 // Kode untuk jenis-jenis PMKS
 $('.terlantar-pengasuh').on('change', function() {
-    if ($(this).val() == 'keluarga') {
+        console.log($(this).val());
+    if ($(this).val() == 1) {
         $('#terlantar-nama-keluarga').prop("disabled", false);
         $('#terlantar-hubungan-keluarga').prop("disabled", false);
         $('#terlantar-panti-pengasuh').prop("disabled", true);

@@ -26,6 +26,8 @@ $(document).ready(function() {
     });
     if (store.get('sidebar' , null) == 0) {
         $('[data-widget="pushmenu"]').PushMenu('collapse');
+    } else {
+        $('[data-widget="pushmenu"]').PushMenu('expand');
     }
 
     // Aktifkan tab berdasarkan fragment di url
@@ -33,4 +35,7 @@ $(document).ready(function() {
     if (hash.match('#')) {
         $('.nav-tabs a[href="#' + hash.split('#')[1] + '"]').tab('show');
     } 
+}).on('hidden.bs.modal', '.modal', function () {
+    // FIX MULTIPLE MODAL BUG
+    $('.modal:visible').length && $(document.body).addClass('modal-open');
 });
